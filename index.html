@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#EEF1F5">
+<title>Odanda Gör</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Manrope:wght@400;600;700&display=swap">
+<style>
+:root{
+  --bg:#EEF1F5;--surface:#FFFFFF;--surface-2:#F6F8FB;--ink:#15213B;--muted:#5B6577;--line:#D9DFE8;
+  --accent:#B8873A;--accent-ink:#FFFFFF;--ok:#1F7A4D;--warn:#8A5A00;--warn-bg:#FFF5DF;--stage:#E4E8EE;
+  --shadow:0 10px 30px rgba(21,33,59,.12);--seg:#DFE4EC;
+  --font-display:"Sora",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --font-body:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#0E1524;--surface:#172033;--surface-2:#1C2740;--ink:#EDF1F7;--muted:#9AA6B8;--line:#2A3549;--accent:#D9AB5C;--accent-ink:#1A1408;--ok:#5CC08A;--warn:#E3B45C;--warn-bg:#2A2410;--stage:#111A2C;--shadow:0 10px 30px rgba(0,0,0,.45);--seg:#1C2740}
+}
+:root[data-theme="dark"]{--bg:#0E1524;--surface:#172033;--surface-2:#1C2740;--ink:#EDF1F7;--muted:#9AA6B8;--line:#2A3549;--accent:#D9AB5C;--accent-ink:#1A1408;--ok:#5CC08A;--warn:#E3B45C;--warn-bg:#2A2410;--stage:#111A2C;--shadow:0 10px 30px rgba(0,0,0,.45);--seg:#1C2740}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{margin:0;color:var(--ink);font:15px/1.5 var(--font-body);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+button,input,a{font-family:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:720px;margin:0 auto;padding:16px 14px 48px}
+.top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:2px 2px 14px}
+.brand{font:700 22px/1.1 var(--font-display);letter-spacing:-.01em}
+.brand small{display:block;font:600 12px/1.4 var(--font-body);color:var(--muted);margin-top:4px;letter-spacing:.02em}
+.pill{flex:none;font-size:11.5px;font-weight:700;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 10px;color:var(--muted);white-space:nowrap}
+.product{padding:0 2px 16px;border-bottom:1px solid var(--line);margin-bottom:14px}
+h1{font:600 16px/1.35 var(--font-display);margin:0 0 8px;text-wrap:balance}
+.price{display:flex;align-items:baseline;gap:8px;font-variant-numeric:tabular-nums}
+.price .old{text-decoration:line-through;color:var(--muted)}
+.price .new{font:700 22px/1 var(--font-display)}
+.badge{background:var(--ink);color:var(--bg);font-size:11px;font-weight:700;padding:3px 6px;border-radius:5px;letter-spacing:.02em}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.label{font-size:11px;color:var(--muted);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.swatch{width:60px;height:60px;border-radius:8px;border:2px solid var(--line);padding:2px;background:var(--surface);cursor:pointer}
+.swatch.on{border-color:var(--accent)}
+.swatch img{width:100%;height:100%;object-fit:cover;border-radius:5px;display:block}
+.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 12px;font-weight:700;font-size:13px;cursor:pointer;color:var(--ink);font-variant-numeric:tabular-nums}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip small{font-weight:600;opacity:.7}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--seg);padding:5px;border-radius:12px;margin:0 0 12px}
+.tabs button{border:0;background:transparent;padding:11px 8px;border-radius:8px;font-weight:700;font-size:14px;color:var(--muted);cursor:pointer}
+.tabs button.on{background:var(--surface);color:var(--ink);box-shadow:0 2px 8px rgba(21,33,59,.10)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:var(--shadow)}
+.stage{position:relative;background:var(--stage);border-radius:10px;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}
+.stage canvas{display:block;width:100%;height:100%}
+.hint{position:absolute;left:10px;right:10px;bottom:10px;background:rgba(21,33,59,.86);color:#fff;padding:9px 12px;border-radius:8px;font-size:13px;text-align:center;pointer-events:none}
+.scale{position:absolute;top:10px;left:10px;right:10px;width:max-content;max-width:calc(100% - 20px);background:var(--warn-bg);color:var(--warn);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700;pointer-events:none;font-variant-numeric:tabular-nums}
+.scale.ok{background:var(--surface);color:var(--ok)}
+.btn{border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;font-weight:700;font-size:14px;cursor:pointer;background:var(--surface);color:var(--ink);text-align:center;text-decoration:none;display:inline-block;line-height:1.2}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.gold{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.sm{padding:9px 12px;font-size:13px}
+.toolbar{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
+.toolbar .btn{width:100%}
+.rooms{display:flex;gap:8px;overflow-x:auto;padding:2px 0 6px}
+.room{flex:0 0 auto;border:2px solid var(--line);border-radius:10px;background:var(--surface);padding:0;cursor:pointer;overflow:hidden;width:112px}
+.room.on{border-color:var(--accent)}
+.room canvas{width:112px;height:80px;display:block}
+.room span{display:block;font-size:12px;font-weight:700;padding:6px;color:var(--ink)}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0;max-width:65ch}
+.calib{position:absolute;left:10px;right:10px;bottom:10px;background:var(--surface);color:var(--ink);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+.calib input{width:96px;padding:8px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;font-weight:700;background:var(--surface);color:var(--ink)}
+model-viewer::part(default-ar-button){display:none}
+model-viewer{width:100%;height:min(58vh,500px);background:var(--stage);border-radius:10px;--poster-color:transparent;--progress-bar-color:var(--accent)}
+.fallback{position:relative;background:var(--stage);border-radius:10px;padding:18px;display:flex;align-items:center;justify-content:center;min-height:240px}
+.fallback img{max-width:88%;box-shadow:var(--shadow)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13px;margin-top:12px}
+.kv b{color:var(--muted);font-weight:600}
+details{font-size:13px;color:var(--muted);margin-top:12px}
+details summary{cursor:pointer;font-weight:700;color:var(--ink)}
+details a{color:var(--ink)}
+#qr{display:flex;justify-content:center;padding:8px;background:#fff;border-radius:8px;width:max-content;margin:8px auto 0}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:10px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9;max-width:90vw;text-align:center}
+.toast.show{opacity:1}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:16px;z-index:10}
+.modal-in{background:var(--surface);border-radius:14px;padding:12px;max-width:520px;width:100%;text-align:center}
+.modal-in img{max-width:100%;border-radius:8px;display:block;margin:0 auto 8px}
+footer{font-size:12px;color:var(--muted);text-align:center;padding:18px 8px 0;max-width:65ch;margin:0 auto}
+footer a{color:inherit}
+@media (prefers-reduced-motion: reduce){.toast{transition:none}}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">Odanda Gör <small>Aşiyan Sanat için konsept demo</small></div>
+    <span class="pill" id="devicePill">…</span>
+  </header>
+
+  <section class="product">
+    <h1 id="urunAd"></h1>
+    <div class="price"><span class="badge">%25</span><span class="old">₺2.000,00</span><span class="new">₺1.499,00</span></div>
+    <div class="label">Çerçeve</div>
+    <div class="row" id="swatches"></div>
+    <div class="label">Boyut</div>
+    <div class="row" id="boyutlar"></div>
+  </section>
+
+  <div class="tabs" role="tablist">
+    <button id="tabFoto" class="on" role="tab">Fotoğrafla dene</button>
+    <button id="tabAr" role="tab">Kamerayla gör (AR)</button>
+  </div>
+
+  <section id="secFoto" class="panel">
+    <div class="stage" id="stage">
+      <canvas id="cv"></canvas>
+      <div class="scale" id="scaleBadge">Ölçek tahmini</div>
+      <div class="hint" id="hint">Duvarının fotoğrafını çek ya da hazır bir oda seç.</div>
+      <div class="calib" id="calib" hidden>
+        <div style="font-weight:700;margin-bottom:6px">İşaretlediğin mesafe gerçekte kaç cm?</div>
+        <div class="row" id="presets"></div>
+        <div class="row" style="margin-top:8px">
+          <input id="cmInput" type="number" inputmode="decimal" min="1" step="0.1" placeholder="cm" aria-label="Santimetre">
+          <button class="btn sm primary" id="calibOk">Uygula</button>
+          <button class="btn sm" id="calibCancel">İptal</button>
+        </div>
+      </div>
+    </div>
+    <div class="toolbar">
+      <label class="btn primary">Fotoğraf çek<input id="inpCam" type="file" accept="image/*" capture="environment" hidden></label>
+      <label class="btn">Galeriden seç<input id="inpGal" type="file" accept="image/*" hidden></label>
+      <button class="btn" id="btnCalib">Ölçü ver</button>
+      <button class="btn" id="btnShare">Kaydet / Paylaş</button>
+    </div>
+    <div class="label">Hazır odalar, gerçek ölçekli</div>
+    <div class="rooms" id="rooms"></div>
+    <p class="note">Tek parmakla sürükle. Ölçü verilmemişse iki parmakla büyüt ya da küçült. <b>Ölçü ver</b> ile fotoğraftaki bilinen bir uzunluğu işaretleyince tablo gerçek boyutuna kilitlenir. Fotoğraf telefondan çıkmaz; işlem tarayıcıda biter.</p>
+    <div class="row" style="margin-top:10px"><button class="btn sm" id="btnReset">Sıfırla</button></div>
+  </section>
+
+  <section id="secAr" class="panel" hidden>
+    <model-viewer id="mv" ar ar-modes="webxr scene-viewer quick-look" ar-placement="wall" ar-scale="fixed"
+      camera-controls touch-action="pan-y" shadow-intensity="0.7" exposure="1" camera-orbit="0deg 82deg auto"
+      alt="Çerçeveli hat tablosu, gerçek ölçülü 3B model"></model-viewer>
+    <div class="fallback" id="fallback" hidden><img id="fallbackImg" alt="Tablo önizleme"></div>
+    <div class="toolbar">
+      <button class="btn gold" id="btnAr">Odanda Gör</button>
+      <a class="btn" id="svLink" hidden>Scene Viewer'ı doğrudan aç</a>
+    </div>
+    <p class="note" id="arStatus"></p>
+    <div id="qrBox" hidden><div id="qr"></div><p class="note" style="text-align:center;margin:8px auto 0">AR yalnızca telefonda çalışır. Kareyi telefon kamerasıyla okut.</p></div>
+    <div class="kv">
+      <b>Model ölçüsü</b><span id="modelOlcu"></span>
+      <b>iPhone</b><span>Safari, AR Quick Look. USDZ dosyasında dikey yüzey çapası var; tablo duvara yerleşir.</span>
+      <b>Android</b><span>Chrome, tarayıcı içi AR (WebXR) ya da Google Scene Viewer; duvara yerleşir.</span>
+    </div>
+    <details>
+      <summary>Geliştirici notları</summary>
+      <p>Çerçeve derinliği 3 cm varsayıldı. Ölçek kilitli; kullanıcı büyütüp küçültemez. iPhone'da tablo duvara dik değil de yatık görünürse yön varsayımı ters demektir; şunu dene: <a href="#" id="yonB">Yön B testi (yatık USDZ)</a>.</p>
+      <p id="devFiles"></p>
+    </details>
+  </section>
+
+  <footer>Konsept demo. Ürün bilgisi ve görseller <a href="https://asiyansanat.com/hasbunallahu-ve-nimel-vekil-nimel-mevla-ve-ni-men-nasir-ayna-cerceveli-tablo" target="_blank" rel="noopener">asiyansanat.com</a> ürün sayfasından alındı; site ile bağlantısı yoktur.</footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<div class="modal" id="modal" hidden><div class="modal-in"><img id="modalImg" alt="Kaydetmek için görsele uzun bas"><p class="note" style="margin:0 0 10px">Görsele uzun basıp “Fotoğrafı Kaydet” diyebilirsin.</p><button class="btn sm" id="modalClose">Kapat</button></div></div>
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.1.0/dist/model-viewer.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script id="assets" type="application/json">{"img:eskitme-altin": "assets/eskitme-altin.webp", "thumb:eskitme-altin": "assets/eskitme-altin-thumb.webp", "glb:eskitme-altin": "models/eskitme-altin.glb", "usdz:eskitme-altin": "models/eskitme-altin.usdz", "img:islemeli-altin": "assets/islemeli-altin.webp", "thumb:islemeli-altin": "assets/islemeli-altin-thumb.webp", "glb:islemeli-altin": "models/islemeli-altin.glb", "usdz:islemeli-altin": "models/islemeli-altin.usdz", "img:eskitme-siyah": "assets/eskitme-siyah.webp", "thumb:eskitme-siyah": "assets/eskitme-siyah-thumb.webp", "glb:eskitme-siyah": "models/eskitme-siyah.glb", "usdz:eskitme-siyah": "models/eskitme-siyah.usdz", "usdz:eskitme-altin-yatik": "models/eskitme-altin-yatik.usdz"}</script>
+<script>
+const VARIANT = "hosted";
+const ASSETS = JSON.parse(document.getElementById("assets").textContent);
+const asset = k => ASSETS[k];
+const URUN = {
+  ad: "Hasbunallahu Ve Nimel Vekil Nimel Mevla Ve Ni'men Nasir Çerçeveli Tablo",
+  kod: "PBH11937",
+  cerceveler: [
+    {id:"eskitme-altin", ad:"Eskitme Altın", aspect:1.6943},
+    {id:"islemeli-altin", ad:"İşlemeli Altın", aspect:1.6943},
+    {id:"eskitme-siyah", ad:"Eskitme Siyah", aspect:1.7879}
+  ],
+  boyutlar: [
+    {ad:"29x50", en:50, gercek:true},
+    {ad:"35x60", en:60},
+    {ad:"45x78", en:78}
+  ]
+};
+const ROOM_W = 400, ROOM_H = 300;
+const ROOMS = [
+  {id:"salon", ad:"Salon", ref:"Koltuk 220 cm"},
+  {id:"yatak", ad:"Yatak odası", ref:"Yatak 160 cm"},
+  {id:"ofis", ad:"Çalışma odası", ref:"Masa 140 cm"}
+];
+const PRESETS = [["A4 uzun kenar", 29.7], ["Kapı", 200], ["Koltuk", 220], ["Yatak", 160]];
+
+const state = {cerceve:"eskitme-altin", boyut:0, bg:null, bgKind:null, room:null, pxPerCm:null,
+  art:{cx:null, cy:null, wPx:null}, calib:{active:false, pts:[]}, imgs:{}, blobUrls:{}};
+
+const $ = id => document.getElementById(id);
+const stage = $("stage"), cv = $("cv"), ctx = cv.getContext("2d");
+let cssW = 0, cssH = 0;
+
+let toastT;
+function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),2800); }
+function hint(msg){ $("hint").textContent = msg; $("hint").hidden = !msg; }
+const dist = (a,b) => Math.hypot(a.x-b.x, a.y-b.y);
+function rr(c,x,y,w,h,r){ c.beginPath(); if(c.roundRect){ c.roundRect(x,y,w,h,r); } else { c.rect(x,y,w,h); } c.closePath(); }
+function cerceve(){ return URUN.cerceveler.find(c=>c.id===state.cerceve); }
+function boyut(){ return URUN.boyutlar[state.boyut]; }
+function fmtCm(v){ return v.toLocaleString("tr-TR",{maximumFractionDigits:1}); }
+function b64ToBlob(dataUri, type){ const bin=atob(dataUri.split(",")[1]); const u8=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u8[i]=bin.charCodeAt(i); return new Blob([u8],{type}); }
+async function fileBlobUrl(key, type){
+  if(state.blobUrls[key]) return state.blobUrls[key];
+  const v=asset(key); let blob;
+  if(v.startsWith("data:")) blob=b64ToBlob(v,type); else { const r=await fetch(v); blob=new Blob([await r.blob()],{type}); }
+  const url=URL.createObjectURL(blob); state.blobUrls[key]=url; return url;
+}
+
+// Ürün kartı
+$("urunAd").textContent = URUN.ad;
+URUN.cerceveler.forEach(c=>{
+  const b=document.createElement("button"); b.className="swatch"+(c.id===state.cerceve?" on":""); b.title=c.ad; b.setAttribute("aria-label", c.ad);
+  const im=document.createElement("img"); im.src=asset("thumb:"+c.id); im.alt=c.ad; b.appendChild(im);
+  b.onclick=()=>{ state.cerceve=c.id; document.querySelectorAll(".swatch").forEach(s=>s.classList.toggle("on", s===b)); draw(); setModel(); toast(c.ad); };
+  $("swatches").appendChild(b);
+  const full=new Image(); full.onload=()=>draw(); full.src=asset("img:"+c.id); state.imgs[c.id]=full;
+});
+URUN.boyutlar.forEach((b,i)=>{
+  const el=document.createElement("button"); el.className="chip"+(i===state.boyut?" on":"");
+  el.innerHTML = b.gercek ? `${b.ad} cm` : `${b.ad} cm <small>örnek</small>`;
+  el.onclick=()=>{ const eski=boyut().en; state.boyut=i; document.querySelectorAll("#boyutlar .chip").forEach(c=>c.classList.remove("on")); el.classList.add("on");
+    if(!state.pxPerCm && state.art.wPx){ state.art.wPx *= b.en/eski; } draw(); $("modelOlcu").textContent = modelOlcuMetni(); };
+  $("boyutlar").appendChild(el);
+});
+function modelOlcuMetni(){ const c=cerceve(); return `${fmtCm(50)} × ${fmtCm(50/c.aspect)} × 3 cm. AR'da yalnızca gerçek boyut (29x50).`; }
+$("modelOlcu").textContent = modelOlcuMetni();
+
+// Sekmeler
+function showTab(t){
+  $("tabFoto").classList.toggle("on", t==="foto"); $("tabAr").classList.toggle("on", t==="ar");
+  $("tabFoto").setAttribute("aria-selected", t==="foto"); $("tabAr").setAttribute("aria-selected", t==="ar");
+  $("secFoto").hidden = t!=="foto"; $("secAr").hidden = t!=="ar";
+  if(t==="foto") fitCanvas(); else { setModel(); prefetchUsdz(); }
+}
+$("tabFoto").onclick=()=>showTab("foto"); $("tabAr").onclick=()=>showTab("ar");
+
+// Kanvas
+function fitCanvas(){
+  cssW = stage.clientWidth || 360; cssH = Math.round(Math.min(window.innerHeight*0.62, cssW*1.25));
+  stage.style.height = cssH+"px";
+  const dpr = Math.min(window.devicePixelRatio||1, 2);
+  cv.width = Math.round(cssW*dpr); cv.height = Math.round(cssH*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+  if(state.art.cx==null){ state.art.cx=cssW/2; state.art.cy=cssH*0.42; state.art.wPx=cssW*0.42; }
+  if(state.bgKind==="room") placeInRoom();
+  draw();
+}
+window.addEventListener("resize", ()=>{ if(!$("secFoto").hidden) fitCanvas(); });
+
+function roomScale(w,h){ const s=Math.max(w/ROOM_W, h/ROOM_H); return {s, ox:(w-ROOM_W*s)/2, oy:(h-ROOM_H*s)/2}; }
+function placeInRoom(){ const {s,ox,oy}=roomScale(cssW,cssH); state.art.cx=ox+200*s; state.art.cy=oy+118*s; }
+
+function drawRoom(c,id,w,h){
+  const {s,ox,oy}=roomScale(w,h); const X=v=>ox+v*s, Y=v=>oy+v*s, S=v=>v*s;
+  const wall = {salon:["#e2d5bd","#cdbc9c"], yatak:["#d7dedb","#bcc7c3"], ofis:["#e8e5dd","#d2cdc1"]}[id];
+  let g=c.createLinearGradient(0,Y(0),0,Y(250)); g.addColorStop(0,wall[0]); g.addColorStop(1,wall[1]); c.fillStyle=g; c.fillRect(X(0),Y(0),S(400),S(250));
+  c.fillStyle="#f4f0e7"; c.fillRect(X(0),Y(244),S(400),S(6));
+  g=c.createLinearGradient(0,Y(250),0,Y(300)); g.addColorStop(0,"#b98f5e"); g.addColorStop(1,"#946d43"); c.fillStyle=g; c.fillRect(X(0),Y(250),S(400),S(50));
+  c.strokeStyle="rgba(0,0,0,.08)"; c.lineWidth=1; for(let x=0;x<=400;x+=40){ c.beginPath(); c.moveTo(X(x),Y(250)); c.lineTo(X(x-30),Y(300)); c.stroke(); }
+  c.save(); c.shadowColor="rgba(0,0,0,.18)"; c.shadowBlur=S(6); c.shadowOffsetY=S(2);
+  if(id==="salon"){
+    c.fillStyle="#7f93a3"; rr(c,X(90),Y(168),S(220),S(34),S(8)); c.fill();
+    c.fillStyle="#8ea1b0"; rr(c,X(90),Y(198),S(220),S(46),S(8)); c.fill();
+    c.fillStyle="#7f93a3"; rr(c,X(78),Y(180),S(18),S(64),S(8)); c.fill(); rr(c,X(304),Y(180),S(18),S(64),S(8)); c.fill();
+    c.fillStyle="#d9c7a7"; rr(c,X(110),Y(176),S(48),S(30),S(6)); c.fill(); c.fillStyle="#bfae8c"; rr(c,X(242),Y(176),S(48),S(30),S(6)); c.fill();
+    c.fillStyle="#5b4632"; c.fillRect(X(96),Y(244),S(6),S(8)); c.fillRect(X(298),Y(244),S(6),S(8));
+    c.fillStyle="#6f8f5a"; c.beginPath(); c.ellipse(X(360),Y(205),S(22),S(30),0,0,Math.PI*2); c.fill(); c.fillStyle="#b3835a"; rr(c,X(348),Y(228),S(24),S(22),S(4)); c.fill();
+  } else if(id==="yatak"){
+    c.fillStyle="#6a5646"; rr(c,X(120),Y(150),S(160),S(66),S(10)); c.fill();
+    c.fillStyle="#f1eee6"; rr(c,X(108),Y(200),S(184),S(44),S(8)); c.fill();
+    c.fillStyle="#c9c2b3"; rr(c,X(108),Y(212),S(184),S(14),S(4)); c.fill();
+    c.fillStyle="#fff"; rr(c,X(136),Y(186),S(56),S(20),S(6)); c.fill(); rr(c,X(208),Y(186),S(56),S(20),S(6)); c.fill();
+    c.fillStyle="#8a7159"; rr(c,X(56),Y(200),S(44),S(44),S(4)); c.fill(); rr(c,X(300),Y(200),S(44),S(44),S(4)); c.fill();
+    c.fillStyle="#e9dfc8"; rr(c,X(66),Y(176),S(24),S(22),S(6)); c.fill(); rr(c,X(310),Y(176),S(24),S(22),S(6)); c.fill();
+  } else {
+    c.fillStyle="#6b4f3a"; rr(c,X(130),Y(174),S(140),S(6),S(2)); c.fill();
+    c.fillStyle="#4a3728"; c.fillRect(X(136),Y(180),S(5),S(64)); c.fillRect(X(259),Y(180),S(5),S(64));
+    c.fillStyle="#2a2a2e"; rr(c,X(170),Y(138),S(60),S(34),S(3)); c.fill(); c.fillRect(X(197),Y(172),S(6),S(4));
+    c.fillStyle="#3b4a5a"; rr(c,X(178),Y(196),S(44),S(48),S(8)); c.fill(); c.fillStyle="#2f3b48"; rr(c,X(186),Y(160),S(28),S(40),S(8)); c.fill();
+    c.fillStyle="#8a7159"; c.fillRect(X(300),Y(120),S(70),S(4)); c.fillStyle="#a56b4e"; c.fillRect(X(306),Y(102),S(10),S(18)); c.fillStyle="#5c7a8c"; c.fillRect(X(318),Y(98),S(8),S(22)); c.fillStyle="#c2a35c"; c.fillRect(X(328),Y(106),S(12),S(14));
+  }
+  c.restore();
+  c.fillStyle="rgba(31,26,20,.55)"; c.font=`600 ${Math.max(10,S(7))}px Manrope, -apple-system, sans-serif`; c.textAlign="center";
+  c.fillText(ROOMS.find(r=>r.id===id).ref, X(200), Y(262));
+  return s;
+}
+
+function artSize(){ const c=cerceve(); const w = state.pxPerCm ? boyut().en*state.pxPerCm : state.art.wPx; return {w, h:w/c.aspect}; }
+
+function draw(){
+  if(!cssW) return;
+  ctx.clearRect(0,0,cssW,cssH);
+  if(state.bgKind==="photo" && state.bg){
+    const im=state.bg, s=Math.max(cssW/im.naturalWidth, cssH/im.naturalHeight), w=im.naturalWidth*s, h=im.naturalHeight*s;
+    ctx.drawImage(im,(cssW-w)/2,(cssH-h)/2,w,h);
+  } else if(state.bgKind==="room"){
+    state.pxPerCm = drawRoom(ctx,state.room,cssW,cssH);
+  } else {
+    const g=ctx.createLinearGradient(0,0,0,cssH); g.addColorStop(0,"#e9e3d6"); g.addColorStop(1,"#d3c9b6"); ctx.fillStyle=g; ctx.fillRect(0,0,cssW,cssH);
+    ctx.fillStyle="#f4f0e7"; ctx.fillRect(0,cssH*0.86,cssW,cssH*0.02); ctx.fillStyle="#b48d61"; ctx.fillRect(0,cssH*0.88,cssW,cssH*0.12);
+  }
+  const im=state.imgs[state.cerceve];
+  if(im && im.complete && im.naturalWidth){
+    const {w,h}=artSize(); const x=state.art.cx-w/2, y=state.art.cy-h/2;
+    ctx.save(); ctx.shadowColor="rgba(0,0,0,.38)"; ctx.shadowBlur=Math.max(8,w*0.045); ctx.shadowOffsetY=Math.max(3,w*0.018);
+    ctx.drawImage(im,x,y,w,h); ctx.restore();
+  }
+  if(state.calib.active || state.calib.pts.length){
+    const p=state.calib.pts; ctx.save(); ctx.strokeStyle="#ff5a1f"; ctx.fillStyle="#ff5a1f"; ctx.lineWidth=2;
+    if(p.length===2){ ctx.setLineDash([6,4]); ctx.beginPath(); ctx.moveTo(p[0].x,p[0].y); ctx.lineTo(p[1].x,p[1].y); ctx.stroke(); }
+    p.forEach(q=>{ ctx.setLineDash([]); ctx.beginPath(); ctx.arc(q.x,q.y,7,0,Math.PI*2); ctx.fill(); ctx.strokeStyle="#fff"; ctx.stroke(); ctx.strokeStyle="#ff5a1f"; });
+    ctx.restore();
+  }
+  const b=$("scaleBadge"), c=cerceve(), en=boyut().en;
+  if(state.bgKind==="room"){ b.textContent=`Gerçek ölçek · oda 1:1 · tablo ${fmtCm(en)}×${fmtCm(en/c.aspect)} cm`; b.className="scale ok"; }
+  else if(state.pxPerCm){ b.textContent=`Gerçek ölçek · tablo ${fmtCm(en)}×${fmtCm(en/c.aspect)} cm`; b.className="scale ok"; }
+  else { b.textContent="Ölçek tahmini · iki parmakla ayarla ya da Ölçü ver"; b.className="scale"; }
+}
+
+// Hazır odalar
+ROOMS.forEach(r=>{
+  const el=document.createElement("button"); el.className="room"; const c2=document.createElement("canvas"); c2.width=224; c2.height=160;
+  const cx2=c2.getContext("2d"); cx2.setTransform(2,0,0,2,0,0); drawRoom(cx2,r.id,112,80);
+  el.appendChild(c2); const sp=document.createElement("span"); sp.textContent=r.ad; el.appendChild(sp);
+  el.onclick=()=>{ state.bgKind="room"; state.room=r.id; state.bg=null; state.calib={active:false,pts:[]}; $("calib").hidden=true;
+    document.querySelectorAll(".room").forEach(x=>x.classList.toggle("on", x===el)); placeInRoom(); draw(); hint("Tabloyu sürükleyip yerini ayarla. Oda ve tablo gerçek ölçekte."); };
+  $("rooms").appendChild(el);
+});
+
+// Fotoğraf
+function loadPhoto(file){
+  if(!file) return; const url=URL.createObjectURL(file); const im=new Image();
+  im.onload=()=>{ state.bg=im; state.bgKind="photo"; state.room=null; state.pxPerCm=null; state.calib={active:false,pts:[]}; $("calib").hidden=true;
+    document.querySelectorAll(".room").forEach(x=>x.classList.remove("on"));
+    state.art.cx=cssW/2; state.art.cy=cssH*0.4; state.art.wPx=cssW*0.42; draw();
+    hint("Tabloyu sürükle. Gerçek boyut için “Ölçü ver”e bas."); };
+  im.onerror=()=>toast("Fotoğraf açılamadı. Başka bir fotoğraf dene.");
+  im.src=url;
+}
+$("inpCam").onchange=e=>loadPhoto(e.target.files[0]); $("inpGal").onchange=e=>loadPhoto(e.target.files[0]);
+
+// Dokunma
+const pointers=new Map(); let drag=null, pinch=null, lockToastShown=false;
+function pos(e){ const r=cv.getBoundingClientRect(); return {x:e.clientX-r.left, y:e.clientY-r.top}; }
+cv.addEventListener("pointerdown",e=>{
+  cv.setPointerCapture(e.pointerId); const p=pos(e); pointers.set(e.pointerId,p);
+  if(state.calib.active){ if(pointers.size===1 && state.calib.pts.length<2){ state.calib.pts.push(p); draw(); if(state.calib.pts.length===2){ $("calib").hidden=false; hint(""); } } return; }
+  if(pointers.size===1){ drag={dx:p.x-state.art.cx, dy:p.y-state.art.cy}; pinch=null; }
+  else if(pointers.size===2){ drag=null; const [a,b]=[...pointers.values()]; pinch={d0:dist(a,b), w0:artSize().w}; }
+});
+cv.addEventListener("pointermove",e=>{
+  if(!pointers.has(e.pointerId)) return; const p=pos(e); pointers.set(e.pointerId,p);
+  if(pinch && pointers.size===2){
+    if(state.pxPerCm){ if(!lockToastShown){ toast("Boyut gerçek ölçeğe kilitli. Serbest bırakmak için Sıfırla."); lockToastShown=true; } return; }
+    const [a,b]=[...pointers.values()]; state.art.wPx=Math.max(40, Math.min(cssW*1.6, pinch.w0*dist(a,b)/pinch.d0)); draw();
+  } else if(drag && pointers.size===1){ state.art.cx=p.x-drag.dx; state.art.cy=p.y-drag.dy; draw(); }
+});
+function up(e){ pointers.delete(e.pointerId); if(pointers.size<2) pinch=null; if(pointers.size===0) drag=null; }
+cv.addEventListener("pointerup",up); cv.addEventListener("pointercancel",up);
+
+// Ölçü verme
+PRESETS.forEach(([ad,cm])=>{ const b=document.createElement("button"); b.className="chip"; b.innerHTML=`${ad} <small>${fmtCm(cm)}</small>`; b.onclick=()=>{ $("cmInput").value=cm; }; $("presets").appendChild(b); });
+$("btnCalib").onclick=()=>{
+  if(state.bgKind==="room"){ toast("Hazır odalar zaten gerçek ölçekte."); return; }
+  if(!state.bgKind){ toast("Önce bir fotoğraf yükle."); return; }
+  state.calib={active:true,pts:[]}; $("calib").hidden=true; draw(); hint("Boyutunu bildiğin bir şeyin iki ucuna dokun: A4 kâğıt, kapı, koltuk…");
+};
+$("calibCancel").onclick=()=>{ state.calib={active:false,pts:[]}; $("calib").hidden=true; draw(); hint("Tabloyu sürükle."); };
+$("calibOk").onclick=()=>{
+  const cm=parseFloat(String($("cmInput").value).replace(",",".")); const p=state.calib.pts;
+  if(!(cm>0) || p.length<2){ toast("Bir cm değeri gir."); return; }
+  const d=dist(p[0],p[1]); if(d<10){ toast("İki nokta çok yakın; tekrar işaretle."); return; }
+  state.pxPerCm=d/cm; state.calib={active:false,pts:[]}; $("calib").hidden=true; lockToastShown=false; draw();
+  hint(""); toast(`Gerçek ölçek ayarlandı: tablo ${fmtCm(boyut().en)} cm genişlikte`);
+};
+$("btnReset").onclick=()=>{ state.bg=null; state.bgKind=null; state.room=null; state.pxPerCm=null; state.calib={active:false,pts:[]}; $("calib").hidden=true;
+  document.querySelectorAll(".room").forEach(x=>x.classList.remove("on")); state.art.cx=cssW/2; state.art.cy=cssH*0.42; state.art.wPx=cssW*0.42; draw(); hint("Duvarının fotoğrafını çek ya da hazır bir oda seç."); };
+
+// Kaydet / paylaş
+$("btnShare").onclick=()=>{
+  cv.toBlob(async blob=>{
+    const file=new File([blob],"odanda-gor.jpg",{type:"image/jpeg"});
+    if(navigator.canShare && navigator.canShare({files:[file]})){ try{ await navigator.share({files:[file], title:"Odanda Gör"}); return; }catch(e){ if(e && e.name==="AbortError") return; } }
+    $("modalImg").src=URL.createObjectURL(blob); $("modal").hidden=false;
+  },"image/jpeg",0.92);
+};
+$("modalClose").onclick=()=>{ $("modal").hidden=true; };
+
+// AR
+const ua=navigator.userAgent;
+const isAndroid=/Android/.test(ua);
+const isIOS=!isAndroid && (/iPhone|iPad|iPod/.test(ua) || (navigator.platform==="MacIntel" && navigator.maxTouchPoints>1 && !/Chrome|Chromium|Edg/.test(ua)));
+const mv=$("mv");
+let modelAttempt=0, currentModel=null;
+function absUrl(rel){ return new URL(rel, location.href).href; }
+async function setModel(){
+  const id=state.cerceve; currentModel=id; modelAttempt=0;
+  mv.setAttribute("poster", asset("img:"+id)); $("fallbackImg").src=asset("img:"+id);
+  $("modelOlcu").textContent=modelOlcuMetni();
+  if(VARIANT==="hosted"){
+    mv.setAttribute("ios-src", absUrl(asset("usdz:"+id)));
+    mv.setAttribute("src", absUrl(asset("glb:"+id)));
+    const glb=absUrl(asset("glb:"+id));
+    $("svLink").href=`intent://arvr.google.com/scene-viewer/1.2?file=${encodeURIComponent(glb)}&mode=ar_preferred&enable_vertical_placement=true&resizable=false&title=${encodeURIComponent("Aşiyan tablo")}#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(location.href)};end;`;
+    $("devFiles").innerHTML=`Dosyalar: <a href="${asset("glb:"+id)}">GLB</a> · <a href="${asset("usdz:"+id)}">USDZ</a>`;
+  } else {
+    const url=await fileBlobUrl("glb:"+id, "model/gltf-binary");
+    if(currentModel!==id) return;
+    mv.setAttribute("src", url);
+    const usdz=await fileBlobUrl("usdz:"+id, "model/vnd.usdz+zip"); mv.setAttribute("ios-src", usdz);
+    $("devFiles").textContent="Bu tek dosyalık sürümde 3B dosyalar sayfanın içine gömülü.";
+  }
+}
+mv.addEventListener("error", async e=>{
+  const id=currentModel;
+  if(VARIANT!=="hosted" && modelAttempt===0){ modelAttempt=1; mv.setAttribute("src", asset("glb:"+id)); return; }
+  mv.hidden=true; $("fallback").hidden=false;
+  $("arStatus").textContent = (isIOS ? "3B önizleme bu ortamda açılamadı; Odanda Gör düğmesi yine de AR Quick Look'u başlatır." : "3B önizleme bu ortamda açılamadı. AR için sayfanın barındırılan sürümü gerekir.");
+});
+mv.addEventListener("load", ()=>{ mv.hidden=false; $("fallback").hidden=true; });
+async function prefetchUsdz(id){ id=id||state.cerceve; return fileBlobUrl("usdz:"+id, "model/vnd.usdz+zip"); }
+function openQuickLook(url){
+  const a=document.createElement("a"); a.setAttribute("rel","ar"); a.href=url+"#allowsContentScaling=0";
+  const img=document.createElement("img"); img.alt=""; a.appendChild(img); document.body.appendChild(a); a.click(); a.remove();
+}
+$("btnAr").onclick=async()=>{
+  if(isIOS){ const url=state.blobUrls["usdz:"+state.cerceve] || await prefetchUsdz(); openQuickLook(url); return; }
+  if(isAndroid){
+    if(VARIANT!=="hosted"){ toast("Bu tek dosyalık sürümde Android AR açılamaz; çerçeve kameraya izin vermiyor. GitHub Pages sürümünü kullan."); return; }
+    if(mv.canActivateAR){ mv.activateAR(); return; }
+    location.href=$("svLink").href; return;
+  }
+  toast("AR yalnızca telefonda çalışır. Bu sayfayı telefonunda aç."); $("qrBox").hidden = (VARIANT!=="hosted");
+};
+$("yonB").onclick=async e=>{ e.preventDefault(); if(!isIOS){ toast("Bu test yalnızca iPhone ve iPad için."); return; } openQuickLook(await prefetchUsdz("eskitme-altin-yatik")); };
+
+if(isIOS){ $("devicePill").textContent="iPhone · Quick Look"; $("arStatus").textContent="Odanda Gör'e bas, kamerayı duvara doğrult ve telefonu yavaşça hareket ettir. Tablo duvara gerçek boyutuyla yerleşir."; }
+else if(isAndroid){ $("devicePill").textContent="Android · AR"; $("arStatus").textContent = VARIANT==="hosted" ? "Odanda Gör'e bas; kamera açılır, duvarı tarayıp tabloyu yerleştir. Açılmazsa 'Scene Viewer'ı doğrudan aç'ı dene." : "Bu tek dosyalık sürümde Android AR açılamaz: sayfa çerçevesi kameraya ve AR'a izin vermiyor. Barındırılan (GitHub Pages) sürümde Google Scene Viewer ile çalışır."; if(VARIANT==="hosted") $("svLink").hidden=false; }
+else { $("devicePill").textContent="Bilgisayar · 3B önizleme"; $("arStatus").textContent = VARIANT==="hosted" ? "Bilgisayarda yalnızca 3B önizleme çalışır. AR için sayfayı telefonda aç:" : "Bilgisayarda yalnızca 3B önizleme çalışır. AR için bu sayfanın bağlantısını telefonunda aç.";
+  if(VARIANT==="hosted"){ $("qrBox").hidden=false; try{ new QRCode($("qr"),{text:location.href,width:150,height:150,correctLevel:QRCode.CorrectLevel.M}); }catch(e){} } }
+
+fitCanvas();
+</script>
+
+</body>
+</html>

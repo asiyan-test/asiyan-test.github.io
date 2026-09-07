@@ -1,0 +1,695 @@
+{
+ "id": "e0efcb20-152d-48d1-9600-f25e8dac996d",
+ "groupVariantsByVariantTypeId": null,
+ "deleted": false,
+ "attributes": [
+  {
+   "imageIds": [],
+   "productAttribute": {
+    "id": "585badad-8264-4e6f-bc32-c3b5866e3402",
+    "name": "Hattat",
+    "description": null,
+    "type": "MULTIPLE_CHOICE",
+    "tableTemplate": null,
+    "options": null
+   },
+   "productAttributeOption": {
+    "id": "bd24ea38-b596-46a8-8f44-4d285f45ff35",
+    "name": "Ali Hüsrevoğlu"
+   },
+   "value": null,
+   "productAttributeId": "585badad-8264-4e6f-bc32-c3b5866e3402",
+   "productAttributeOptionId": "bd24ea38-b596-46a8-8f44-4d285f45ff35",
+   "images": []
+  },
+  {
+   "imageIds": [],
+   "productAttribute": {
+    "id": "4466f7ad-8168-4903-b7be-45c9536912db",
+    "name": "Tablo Duruşu",
+    "description": null,
+    "type": "MULTIPLE_CHOICE",
+    "tableTemplate": null,
+    "options": null
+   },
+   "productAttributeOption": {
+    "id": "86b01e65-c7a4-4e2a-9175-5fe545ccb561",
+    "name": "Yatay"
+   },
+   "value": null,
+   "productAttributeId": "4466f7ad-8168-4903-b7be-45c9536912db",
+   "productAttributeOptionId": "86b01e65-c7a4-4e2a-9175-5fe545ccb561",
+   "images": []
+  },
+  {
+   "imageIds": [],
+   "productAttribute": {
+    "id": "feff33d7-e1b6-4ce6-9bc5-a48eff13ac4d",
+    "name": "Yazı Türü",
+    "description": null,
+    "type": "MULTIPLE_CHOICE",
+    "tableTemplate": null,
+    "options": null
+   },
+   "productAttributeOption": {
+    "id": "2ad33514-5bf0-4533-91e1-c63bbee5af17",
+    "name": "Sülüs"
+   },
+   "value": null,
+   "productAttributeId": "feff33d7-e1b6-4ce6-9bc5-a48eff13ac4d",
+   "productAttributeOptionId": "2ad33514-5bf0-4533-91e1-c63bbee5af17",
+   "images": []
+  },
+  {
+   "imageIds": [],
+   "productAttribute": {
+    "id": "81940571-c135-4615-aab4-f91a16a829c5",
+    "name": "Ödeme/Taksit Seçenekleri",
+    "description": null,
+    "type": "HTML",
+    "tableTemplate": null,
+    "options": null
+   },
+   "productAttributeOption": null,
+   "value": "[taksit-tablosu]",
+   "productAttributeId": "81940571-c135-4615-aab4-f91a16a829c5",
+   "productAttributeOptionId": null,
+   "images": []
+  },
+  {
+   "imageIds": [],
+   "productAttribute": {
+    "id": "b378fba1-83fa-4266-8c69-77f44ca5ed88",
+    "name": "İçeriğine Göre",
+    "description": null,
+    "type": "MULTIPLE_CHOICE",
+    "tableTemplate": null,
+    "options": null
+   },
+   "productAttributeOption": {
+    "id": "a2e4f90a-8262-42e0-9f26-2d9cf48c1e73",
+    "name": "Hasbunallahu Ve Nimel Vekil"
+   },
+   "value": null,
+   "productAttributeId": "b378fba1-83fa-4266-8c69-77f44ca5ed88",
+   "productAttributeOptionId": "a2e4f90a-8262-42e0-9f26-2d9cf48c1e73",
+   "images": []
+  },
+  {
+   "imageIds": [],
+   "productAttribute": {
+    "id": "3087431a-23a2-42e7-a3c0-a1b255879899",
+    "name": "Teknik Bilgi",
+    "description": null,
+    "type": "HTML",
+    "tableTemplate": null,
+    "options": null
+   },
+   "productAttributeOption": null,
+   "value": "<div class=\"uretim-bilgileri\" style=\"font-weight: normal;\"><p style=\"font-weight: normal; margin: 0;\">SKU: PBH11937</p><br><div class=\"uretim-varyant\" style=\"font-weight: normal;\"><p style=\"font-weight: normal; margin: 0 0 8px 0;\">Eskitme Altın | 29x50</p><table border=\"1\" cellpadding=\"4\" cellspacing=\"0\" style=\"border-collapse: collapse; font-weight: normal;\"><tbody><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">Çerçeve Kodu:</td><td style=\"font-weight: normal; vertical-align: top;\">DC 5323-1</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">Çerçeve Dış Ölçü:</td><td style=\"font-weight: normal; vertical-align: top;\">29x50</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">Kenarlık Türü:</td><td style=\"font-weight: normal; vertical-align: top;\">Kenarlık Yok</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">Kenarlık Kodu:</td><td style=\"font-weight: normal; vertical-align: top;\">Mevcut Değil</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">Kenarlık Dış Ölçü:</td><td style=\"font-weight: normal; vertical-align: top;\">Mevcut Değil</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">İç Çerçeve İç Ölçü:</td><td style=\"font-weight: normal; vertical-align: top;\">Mevcut Değil</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">İç Çerçeve Kodu:</td><td style=\"font-weight: normal; vertical-align: top;\">Mevcut Değil</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">Cam Ölçüsü:</td><td style=\"font-weight: normal; vertical-align: top;\">20x41</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">Baskı Kodu:</td><td style=\"font-weight: normal; vertical-align: top;\">H11937</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">Baskı Ölçüsü:</td><td style=\"font-weight: normal; vertical-align: top;\">20x41</td></tr></tbody></table></div><div class=\"uretim-varyant\" style=\"font-weight: normal;\"><p style=\"font-weight: normal; margin: 0 0 8px 0;\">İşlemeli Altın | 29x50</p><table border=\"1\" cellpadding=\"4\" cellspacing=\"0\" style=\"border-collapse: collapse; font-weight: normal;\"><tbody><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">Çerçeve Kodu:</td><td style=\"font-weight: normal; vertical-align: top;\">DC 5323-11</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">Çerçeve Dış Ölçü:</td><td style=\"font-weight: normal; vertical-align: top;\">29x50</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">Kenarlık Türü:</td><td style=\"font-weight: normal; vertical-align: top;\">Kenarlık Yok</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">Kenarlık Kodu:</td><td style=\"font-weight: normal; vertical-align: top;\">Mevcut Değil</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">Kenarlık Dış Ölçü:</td><td style=\"font-weight: normal; vertical-align: top;\">Mevcut Değil</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">İç Çerçeve İç Ölçü:</td><td style=\"font-weight: normal; vertical-align: top;\">Mevcut Değil</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">İç Çerçeve Kodu:</td><td style=\"font-weight: normal; vertical-align: top;\">Mevcut Değil</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">Cam Ölçüsü:</td><td style=\"font-weight: normal; vertical-align: top;\">20x41</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">Baskı Kodu:</td><td style=\"font-weight: normal; vertical-align: top;\">H11937</td></tr><tr><td style=\"font-weight: normal; width: 180px; min-width: 180px; vertical-align: top;\">Baskı Ölçüsü:</td><td style=\"font-weight: normal; vertical-align: top;\">20x41</td></tr></tbody></table></div></div>",
+   "productAttributeId": "3087431a-23a2-42e7-a3c0-a1b255879899",
+   "productAttributeOptionId": null,
+   "images": []
+  }
+ ],
+ "brand": null,
+ "campaigns": [
+  {
+   "campaign": {
+    "buyXThenGetY": {
+     "buyX": {
+      "amount": 3,
+      "applyByQuantity": true
+     },
+     "getY": {
+      "amount": 1,
+      "discountRatio": 100
+     },
+     "maxUsagePerOrder": null
+    },
+    "currencyCodes": null,
+    "dateRange": null,
+    "fixedDiscount": null,
+    "id": "ef37a975-5fc4-466e-905b-b8fa97cb5b78",
+    "salesChannelIds": null,
+    "tieredDiscount": null,
+    "title": "4 al 3 öde",
+    "type": "BUY_X_THEN_GET_Y"
+   },
+   "variantIds": []
+  }
+ ],
+ "categories": [
+  {
+   "id": "964ee071-dc6b-433d-9641-e0e1892f0145",
+   "name": "Hasbunallahu Ve Nimel Vekil Tabloları",
+   "path": [
+    {
+     "id": "4e990ea0-3267-499e-893f-5841d7756a97",
+     "name": "İçeriğine Göre Tablolar",
+     "slug": "icerigine-gore-tablolar"
+    }
+   ],
+   "slug": "hasbunallahu-ve-nimel-vekil-tablolari",
+   "categoryPath": [
+    "İçeriğine Göre Tablolar"
+   ],
+   "description": null,
+   "imageId": null,
+   "parentId": null,
+   "metaData": {
+    "id": "",
+    "createdAt": 0,
+    "updatedAt": 0,
+    "name": "Hasbunallahu Ve Nimel Vekil Tabloları",
+    "slug": "hasbunallahu-ve-nimel-vekil-tablolari"
+   },
+   "categoryPathItems": [
+    {
+     "metaData": {
+      "id": "",
+      "createdAt": 0,
+      "updatedAt": 0,
+      "name": "İçeriğine Göre Tablolar",
+      "slug": "icerigine-gore-tablolar"
+     },
+     "description": null,
+     "name": "İçeriğine Göre Tablolar",
+     "imageId": null,
+     "id": "4e990ea0-3267-499e-893f-5841d7756a97",
+     "createdAt": 0,
+     "updatedAt": 0
+    }
+   ],
+   "createdAt": 0,
+   "updatedAt": 0,
+   "orderType": "BEST_SELLER",
+   "conditions": null,
+   "conditionValues": null
+  },
+  {
+   "id": "39a81d4d-0a5d-453c-8767-aabd3e1f1d1e",
+   "name": "Çerçeveli Hat Eserleri",
+   "path": [
+    {
+     "id": "8f01f8f2-70ad-4ce7-9d8a-65fb83a8b661",
+     "name": "Hat Eseri Kategorileri",
+     "slug": "hat-eseri-kategorileri"
+    }
+   ],
+   "slug": "cerceveli-baski-hat-eserleri",
+   "categoryPath": [
+    "Hat Eseri Kategorileri"
+   ],
+   "description": null,
+   "imageId": null,
+   "parentId": null,
+   "metaData": {
+    "id": "",
+    "createdAt": 0,
+    "updatedAt": 0,
+    "name": "Çerçeveli Hat Eserleri",
+    "slug": "cerceveli-baski-hat-eserleri"
+   },
+   "categoryPathItems": [
+    {
+     "metaData": {
+      "id": "",
+      "createdAt": 0,
+      "updatedAt": 0,
+      "name": "Hat Eseri Kategorileri",
+      "slug": "hat-eseri-kategorileri"
+     },
+     "description": null,
+     "name": "Hat Eseri Kategorileri",
+     "imageId": null,
+     "id": "8f01f8f2-70ad-4ce7-9d8a-65fb83a8b661",
+     "createdAt": 0,
+     "updatedAt": 0
+    }
+   ],
+   "createdAt": 0,
+   "updatedAt": 0,
+   "orderType": "BEST_SELLER",
+   "conditions": null,
+   "conditionValues": null
+  },
+  {
+   "id": "abcf6b84-9a5e-4bb4-9a81-c0d3ffae9ea2",
+   "name": "İndirimli Hat Eserleri",
+   "path": [
+    {
+     "id": "8f01f8f2-70ad-4ce7-9d8a-65fb83a8b661",
+     "name": "Hat Eseri Kategorileri",
+     "slug": "hat-eseri-kategorileri"
+    }
+   ],
+   "slug": "indirimli-hat-eserleri",
+   "categoryPath": [
+    "Hat Eseri Kategorileri"
+   ],
+   "description": null,
+   "imageId": null,
+   "parentId": null,
+   "metaData": {
+    "id": "",
+    "createdAt": 0,
+    "updatedAt": 0,
+    "name": "İndirimli Hat Eserleri",
+    "slug": "indirimli-hat-eserleri"
+   },
+   "categoryPathItems": [
+    {
+     "metaData": {
+      "id": "",
+      "createdAt": 0,
+      "updatedAt": 0,
+      "name": "Hat Eseri Kategorileri",
+      "slug": "hat-eseri-kategorileri"
+     },
+     "description": null,
+     "name": "Hat Eseri Kategorileri",
+     "imageId": null,
+     "id": "8f01f8f2-70ad-4ce7-9d8a-65fb83a8b661",
+     "createdAt": 0,
+     "updatedAt": 0
+    }
+   ],
+   "createdAt": 0,
+   "updatedAt": 0,
+   "orderType": "BEST_SELLER",
+   "conditions": null,
+   "conditionValues": null
+  }
+ ],
+ "tags": [],
+ "description": "",
+ "averageRating": 4.92,
+ "reviewCount": 13,
+ "stars": [
+  {
+   "count": 12,
+   "star": 5
+  },
+  {
+   "count": 1,
+   "star": 4
+  }
+ ],
+ "baseUnit": null,
+ "metaData": {
+  "canonicals": null,
+  "description": null,
+  "disableIndex": null,
+  "metadataOverrides": [],
+  "pageTitle": null,
+  "redirectTo": null,
+  "slug": "hasbunallahu-ve-nimel-vekil-nimel-mevla-ve-ni-men-nasir-cerceveli-tablo-13",
+  "id": "",
+  "createdAt": 0,
+  "updatedAt": 0
+ },
+ "name": "Hasbunallahu Ve Nimel Vekil Nimel Mevla Ve Ni'men Nasir Çerçeveli Tablo",
+ "shortDescription": "",
+ "productOptionSetId": null,
+ "variantTypes": [
+  {
+   "order": 0,
+   "variantType": {
+    "id": "ff2bab92-5139-4dcd-a646-252a7dafaa5f",
+    "name": "Çerçeve",
+    "selectionType": "COLOR",
+    "values": [
+     {
+      "id": "383ccea5-cde1-41a2-bf1d-11c911845050",
+      "colorCode": null,
+      "name": "Eskitme Altın",
+      "thumbnailImageId": "3bb5714e-5b03-4d8d-8942-5a3069fe46d6",
+      "variantTypeId": "ff2bab92-5139-4dcd-a646-252a7dafaa5f"
+     },
+     {
+      "id": "4478e319-cc0a-4000-acf2-3cc5b4fa5d51",
+      "colorCode": null,
+      "name": "İşlemeli Altın",
+      "thumbnailImageId": "25e89edf-0a2e-4aec-887b-6e559d60e48e",
+      "variantTypeId": "ff2bab92-5139-4dcd-a646-252a7dafaa5f"
+     },
+     {
+      "id": "5f08064b-d9d8-4afc-b8c5-5a75bba5e9ad",
+      "colorCode": null,
+      "name": "Eskitme Siyah",
+      "thumbnailImageId": "1b3366ed-c90b-41b1-a311-81048f57581a",
+      "variantTypeId": "ff2bab92-5139-4dcd-a646-252a7dafaa5f"
+     }
+    ]
+   },
+   "variantValueIds": [
+    "383ccea5-cde1-41a2-bf1d-11c911845050",
+    "4478e319-cc0a-4000-acf2-3cc5b4fa5d51",
+    "5f08064b-d9d8-4afc-b8c5-5a75bba5e9ad"
+   ]
+  },
+  {
+   "order": 1,
+   "variantType": {
+    "id": "b3afffc8-298a-4113-922a-c638b5fb1c24",
+    "name": "Boyut",
+    "selectionType": "CHOICE",
+    "values": [
+     {
+      "id": "21521435-3ee2-4ac7-9afe-142207789ecc",
+      "colorCode": null,
+      "name": "29x50",
+      "thumbnailImageId": null,
+      "variantTypeId": "b3afffc8-298a-4113-922a-c638b5fb1c24"
+     }
+    ]
+   },
+   "variantValueIds": [
+    "21521435-3ee2-4ac7-9afe-142207789ecc"
+   ]
+  }
+ ],
+ "variants": [
+  {
+   "attributes": [],
+   "barcodeList": [
+    "PB10120-1"
+   ],
+   "bundleSettings": null,
+   "deleted": false,
+   "id": "3ecd9d58-53d6-4fb1-85af-9e37fc61940e",
+   "images": [
+    {
+     "imageId": "dfd5c352-999f-42a5-b8f3-6e5fd7fb3937",
+     "isMain": true,
+     "isVideo": false,
+     "order": 1,
+     "fileName": null,
+     "image": {
+      "id": "dfd5c352-999f-42a5-b8f3-6e5fd7fb3937",
+      "isVideo": false
+     }
+    },
+    {
+     "imageId": "93a9d665-03d4-4001-9030-3eb3a1d29172",
+     "isMain": false,
+     "isVideo": false,
+     "order": 2,
+     "fileName": null,
+     "image": {
+      "id": "93a9d665-03d4-4001-9030-3eb3a1d29172",
+      "isVideo": false
+     }
+    },
+    {
+     "imageId": "e665eece-e757-4b79-99e0-8aa5c823c68c",
+     "isMain": false,
+     "isVideo": false,
+     "order": 3,
+     "fileName": null,
+     "image": {
+      "id": "e665eece-e757-4b79-99e0-8aa5c823c68c",
+      "isVideo": false
+     }
+    },
+    {
+     "imageId": "ec584b1d-9f23-4321-9df4-49da79e39c43",
+     "isMain": false,
+     "isVideo": false,
+     "order": 4,
+     "fileName": null,
+     "image": {
+      "id": "ec584b1d-9f23-4321-9df4-49da79e39c43",
+      "isVideo": false
+     }
+    }
+   ],
+   "isActive": true,
+   "prices": [
+    {
+     "buyPrice": null,
+     "campaignPrice": null,
+     "currency": "TRY",
+     "currencyCode": "TRY",
+     "currencySymbol": "₺",
+     "discountPrice": 1499,
+     "priceListId": null,
+     "sellPrice": 2000,
+     "unitPrice": null
+    }
+   ],
+   "sellIfOutOfStock": true,
+   "sku": "PBH11937",
+   "stocks": [
+    {
+     "stockCount": 10,
+     "stockLocationId": "dcb5dda1-cf64-4196-aa06-a5535c481995"
+    }
+   ],
+   "unit": null,
+   "variantValues": [
+    {
+     "id": "383ccea5-cde1-41a2-bf1d-11c911845050",
+     "name": "Eskitme Altın",
+     "colorCode": "",
+     "thumbnailImageId": "3bb5714e-5b03-4d8d-8942-5a3069fe46d6",
+     "variantTypeId": "ff2bab92-5139-4dcd-a646-252a7dafaa5f"
+    },
+    {
+     "id": "21521435-3ee2-4ac7-9afe-142207789ecc",
+     "name": "29x50",
+     "colorCode": "",
+     "thumbnailImageId": "",
+     "variantTypeId": "b3afffc8-298a-4113-922a-c638b5fb1c24"
+    }
+   ],
+   "weight": null,
+   "productId": "e0efcb20-152d-48d1-9600-f25e8dac996d",
+   "price": {
+    "buyPrice": null,
+    "campaignPrice": null,
+    "currency": "",
+    "currencyCode": "",
+    "currencySymbol": "",
+    "discountPrice": null,
+    "priceListId": null,
+    "sellPrice": 0,
+    "unitPrice": null
+   },
+   "stock": 10
+  },
+  {
+   "attributes": [],
+   "barcodeList": [
+    "PB10120-3"
+   ],
+   "bundleSettings": null,
+   "deleted": false,
+   "id": "077ba697-300f-4e27-9f11-a845675e7222",
+   "images": [
+    {
+     "imageId": "2eb38677-88de-4505-9312-9128d2f7c308",
+     "isMain": true,
+     "isVideo": false,
+     "order": 1,
+     "fileName": null,
+     "image": {
+      "id": "2eb38677-88de-4505-9312-9128d2f7c308",
+      "isVideo": false
+     }
+    },
+    {
+     "imageId": "aa38e608-4897-4bab-8994-e1ff19e1651f",
+     "isMain": false,
+     "isVideo": false,
+     "order": 2,
+     "fileName": null,
+     "image": {
+      "id": "aa38e608-4897-4bab-8994-e1ff19e1651f",
+      "isVideo": false
+     }
+    },
+    {
+     "imageId": "57d819bf-b711-4bf2-907b-c5a36675f0b9",
+     "isMain": false,
+     "isVideo": false,
+     "order": 3,
+     "fileName": null,
+     "image": {
+      "id": "57d819bf-b711-4bf2-907b-c5a36675f0b9",
+      "isVideo": false
+     }
+    },
+    {
+     "imageId": "da850a24-36ed-4120-b327-7e6c35a67e0e",
+     "isMain": false,
+     "isVideo": false,
+     "order": 4,
+     "fileName": null,
+     "image": {
+      "id": "da850a24-36ed-4120-b327-7e6c35a67e0e",
+      "isVideo": false
+     }
+    }
+   ],
+   "isActive": true,
+   "prices": [
+    {
+     "buyPrice": null,
+     "campaignPrice": null,
+     "currency": "TRY",
+     "currencyCode": "TRY",
+     "currencySymbol": "₺",
+     "discountPrice": 1499,
+     "priceListId": null,
+     "sellPrice": 2000,
+     "unitPrice": null
+    }
+   ],
+   "sellIfOutOfStock": true,
+   "sku": "PBH11937",
+   "stocks": [
+    {
+     "stockCount": 10,
+     "stockLocationId": "dcb5dda1-cf64-4196-aa06-a5535c481995"
+    }
+   ],
+   "unit": null,
+   "variantValues": [
+    {
+     "id": "4478e319-cc0a-4000-acf2-3cc5b4fa5d51",
+     "name": "İşlemeli Altın",
+     "colorCode": "",
+     "thumbnailImageId": "25e89edf-0a2e-4aec-887b-6e559d60e48e",
+     "variantTypeId": "ff2bab92-5139-4dcd-a646-252a7dafaa5f"
+    },
+    {
+     "id": "21521435-3ee2-4ac7-9afe-142207789ecc",
+     "name": "29x50",
+     "colorCode": "",
+     "thumbnailImageId": "",
+     "variantTypeId": "b3afffc8-298a-4113-922a-c638b5fb1c24"
+    }
+   ],
+   "weight": null,
+   "productId": "e0efcb20-152d-48d1-9600-f25e8dac996d",
+   "price": {
+    "buyPrice": null,
+    "campaignPrice": null,
+    "currency": "",
+    "currencyCode": "",
+    "currencySymbol": "",
+    "discountPrice": null,
+    "priceListId": null,
+    "sellPrice": 0,
+    "unitPrice": null
+   },
+   "stock": 10
+  },
+  {
+   "attributes": [],
+   "barcodeList": [
+    "ESC-PBH11937-29x50"
+   ],
+   "bundleSettings": null,
+   "deleted": false,
+   "id": "a72ee4a7-2263-4bd7-9458-08c2ad5fbaf4",
+   "images": [
+    {
+     "imageId": "4104c8ef-1d81-4a43-b993-d3b6ca3fe6fa",
+     "isMain": true,
+     "isVideo": false,
+     "order": 1,
+     "fileName": "",
+     "image": {
+      "id": "4104c8ef-1d81-4a43-b993-d3b6ca3fe6fa",
+      "isVideo": false
+     }
+    },
+    {
+     "imageId": "4492046c-ac53-4737-9fd7-c8813ea715b0",
+     "isMain": false,
+     "isVideo": false,
+     "order": 2,
+     "fileName": "",
+     "image": {
+      "id": "4492046c-ac53-4737-9fd7-c8813ea715b0",
+      "isVideo": false
+     }
+    }
+   ],
+   "isActive": true,
+   "prices": [
+    {
+     "buyPrice": null,
+     "campaignPrice": null,
+     "currency": "TRY",
+     "currencyCode": "TRY",
+     "currencySymbol": "₺",
+     "discountPrice": 1499,
+     "priceListId": null,
+     "sellPrice": 2000,
+     "unitPrice": null
+    }
+   ],
+   "sellIfOutOfStock": true,
+   "sku": "PBH11937",
+   "stocks": [
+    {
+     "stockCount": 10,
+     "stockLocationId": "dcb5dda1-cf64-4196-aa06-a5535c481995"
+    }
+   ],
+   "unit": null,
+   "variantValues": [
+    {
+     "id": "5f08064b-d9d8-4afc-b8c5-5a75bba5e9ad",
+     "name": "Eskitme Siyah",
+     "colorCode": "",
+     "thumbnailImageId": "1b3366ed-c90b-41b1-a311-81048f57581a",
+     "variantTypeId": "ff2bab92-5139-4dcd-a646-252a7dafaa5f"
+    },
+    {
+     "id": "21521435-3ee2-4ac7-9afe-142207789ecc",
+     "name": "29x50",
+     "colorCode": "",
+     "thumbnailImageId": "",
+     "variantTypeId": "b3afffc8-298a-4113-922a-c638b5fb1c24"
+    }
+   ],
+   "weight": null,
+   "productId": "e0efcb20-152d-48d1-9600-f25e8dac996d",
+   "price": {
+    "buyPrice": null,
+    "campaignPrice": null,
+    "currency": "",
+    "currencyCode": "",
+    "currencySymbol": "",
+    "discountPrice": null,
+    "priceListId": null,
+    "sellPrice": 0,
+    "unitPrice": null
+   },
+   "stock": 10
+  }
+ ],
+ "dynamicPriceListIds": null,
+ "productVolumeDiscountId": null,
+ "selectedVariantValues": [
+  {
+   "id": "383ccea5-cde1-41a2-bf1d-11c911845050",
+   "name": "Eskitme Altın",
+   "colorCode": "",
+   "thumbnailImageId": "3bb5714e-5b03-4d8d-8942-5a3069fe46d6",
+   "variantTypeId": "ff2bab92-5139-4dcd-a646-252a7dafaa5f"
+  },
+  {
+   "id": "21521435-3ee2-4ac7-9afe-142207789ecc",
+   "name": "29x50",
+   "colorCode": "",
+   "thumbnailImageId": "",
+   "variantTypeId": "b3afffc8-298a-4113-922a-c638b5fb1c24"
+  }
+ ]
+}
