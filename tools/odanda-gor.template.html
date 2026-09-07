@@ -27,11 +27,29 @@ button,input,a{font-family:inherit}
 .bar-navy span{display:inline-block;padding:0 44px}
 .crumbs{font-size:13px;color:#555;padding:16px 0 6px;display:flex;gap:10px;flex-wrap:wrap}
 .crumbs b{font-weight:400;color:var(--ink)}
-.product-grid{display:grid;gap:18px;grid-template-columns:minmax(0,1fr);grid-template-areas:"info" "stage" "cta";padding:8px 0 28px}
+.product-grid{display:grid;gap:18px;grid-template-columns:minmax(0,1fr);grid-template-areas:"gallery" "info" "cta";padding:8px 0 28px}
 .product-grid>*{min-width:0}
 .plugin,.stage,.tabs,.toolbar{min-width:0}
-@media (min-width:900px){.product-grid{grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);grid-template-areas:"stage info" "stage cta";align-items:start;gap:36px}}
-.col-stage{grid-area:stage}.col-info{grid-area:info}.col-cta{grid-area:cta}
+.col-gallery{grid-area:gallery}
+.gallery{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+@media (min-width:900px){.gallery{grid-template-columns:76px minmax(0,1fr)}.thumbs{flex-direction:column;order:-1}}
+.gmain{background:#F1F1F1;border-radius:6px;overflow:hidden;aspect-ratio:1/1;display:grid;place-items:center}
+.gmain img{width:100%;height:100%;object-fit:cover;display:block}
+.thumbs{display:flex;gap:8px;overflow-x:auto;padding:2px}
+.thumbs button{flex:0 0 auto;width:70px;height:70px;border:1px solid #D9D9D9;border-radius:4px;padding:0;background:#F1F1F1;cursor:pointer;overflow:hidden}
+.thumbs button.on{border:2px solid var(--black)}
+.thumbs button img{width:100%;height:100%;object-fit:cover;display:block}
+.odg-btn{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px;border:1.5px solid var(--navy);border-radius:999px;padding:14px 16px;font:500 13.5px/1.2 var(--font);color:var(--navy);background:#fff;text-decoration:none}
+.odg-btn svg{width:18px;height:18px;flex:none}
+.odg-btn small{font-weight:300;color:var(--muted)}
+.plugin-section{padding:4px 0 28px;scroll-margin-top:12px}
+.plugin-section .plugin{padding:16px}
+@media (min-width:900px){.plugin-section .plugin{padding:22px 24px}}
+.summary{font-size:13px;color:var(--muted);font-weight:300}
+.summary b{font-weight:500;color:var(--ink)}
+.summary a{color:var(--navy)}
+@media (min-width:900px){.product-grid{grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);grid-template-areas:"gallery info" "gallery cta";align-items:start;gap:36px}}
+.col-info{grid-area:info}.col-cta{grid-area:cta}
 h1{font:400 22px/1.35 var(--font);margin:0 0 8px;text-wrap:balance;color:var(--ink)}
 .stock{color:var(--red);font-weight:500;font-size:14px;display:inline-flex;align-items:center;gap:6px}
 .stock i{width:9px;height:9px;border-radius:50%;background:var(--red);display:inline-block}
@@ -140,6 +158,14 @@ footer a{color:inherit}
     <div class="crumbs"><span>İçeriğine Göre Tablolar</span><span>›</span><b>Hasbunallahu Ve Nimel Vekil Tabloları</b></div>
 
     <main class="product-grid">
+      <section class="col-gallery">
+        <div class="gallery">
+          <div class="thumbs" id="thumbs"></div>
+          <div class="gmain"><img id="mainImg" alt="Ürün fotoğrafı"></div>
+        </div>
+        <a class="odg-btn" href="#odanda-gor" id="odgBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="8" width="10" height="8" rx="1"/></svg><span>Odanda Gör <small>· tabloyu kendi duvarında dene</small></span></a>
+      </section>
+
       <section class="col-info">
         <h1 id="urunAd"></h1>
         <span class="stock"><i></i>Tükeniyor</span>
@@ -152,69 +178,6 @@ footer a{color:inherit}
         <div class="row" id="boyutlar"></div>
       </section>
 
-      <section class="col-stage">
-        <div class="plugin">
-          <div class="plugin-head">
-            <div class="eyebrow">Odanda Gör <small>Tabloyu satın almadan önce kendi duvarında gör</small></div>
-            <span class="pill" id="devicePill">…</span>
-          </div>
-          <div class="tabs" role="tablist">
-            <button id="tabFoto" class="on" role="tab">Fotoğrafla dene</button>
-            <button id="tabAr" role="tab">Kamerayla gör (AR)</button>
-          </div>
-
-          <div id="secFoto">
-            <div class="stage" id="stage">
-              <canvas id="cv"></canvas>
-              <div class="scale" id="scaleBadge">Ölçek tahmini</div>
-              <div class="hint" id="hint">Tabloyu sürükle. Kendi duvarın için “Fotoğraf çek”.</div>
-              <div class="calib" id="calib" hidden>
-                <div style="font-weight:600;margin-bottom:6px">İşaretlediğin mesafe gerçekte kaç cm?</div>
-                <div class="row" id="presets"></div>
-                <div class="row" style="margin-top:8px">
-                  <input id="cmInput" type="number" inputmode="decimal" min="1" step="0.1" placeholder="cm" aria-label="Santimetre">
-                  <button class="btn sm primary" id="calibOk">Uygula</button>
-                  <button class="btn sm" id="calibCancel">İptal</button>
-                </div>
-              </div>
-            </div>
-            <div class="toolbar">
-              <label class="btn primary">Fotoğraf çek<input id="inpCam" type="file" accept="image/*" capture="environment" hidden></label>
-              <label class="btn">Galeriden seç<input id="inpGal" type="file" accept="image/*" hidden></label>
-              <button class="btn" id="btnCalib" hidden>Ölçü ver</button>
-              <button class="btn" id="btnShare">Kaydet / Paylaş</button>
-            </div>
-            <div class="label" style="margin-top:14px">Hazır odalar</div>
-            <div class="rooms" id="rooms"></div>
-            <p class="note">Tek parmakla sürükle. Kendi fotoğrafında iki parmakla büyüt ya da küçült; <b>Ölçü ver</b> ile bilinen bir uzunluğu işaretleyince tablo gerçek boyutuna kilitlenir. Fotoğraf telefondan çıkmaz; işlem tarayıcıda biter.</p>
-            <div class="row" style="margin-top:10px"><button class="btn sm" id="btnReset">Sıfırla</button></div>
-          </div>
-
-          <div id="secAr" hidden>
-            <model-viewer id="mv" ar ar-modes="webxr scene-viewer quick-look" ar-placement="wall" ar-scale="fixed"
-              camera-controls touch-action="pan-y" shadow-intensity="0.7" exposure="1" camera-orbit="0deg 82deg auto"
-              alt="Çerçeveli hat tablosu, gerçek ölçülü 3B model"></model-viewer>
-            <div class="fallback" id="fallback" hidden><img id="fallbackImg" alt="Tablo önizleme"></div>
-            <div class="toolbar">
-              <button class="btn primary" id="btnAr">Odanda Gör</button>
-              <a class="btn" id="svLink" hidden>Scene Viewer'ı doğrudan aç</a>
-            </div>
-            <p class="note" id="arStatus"></p>
-            <div id="qrBox" hidden><div id="qr"></div><p class="note" style="text-align:center;margin:8px auto 0">AR yalnızca telefonda çalışır. Kareyi telefon kamerasıyla okut.</p></div>
-            <div class="kv">
-              <b>Model ölçüsü</b><span id="modelOlcu"></span>
-              <b>iPhone</b><span>Safari, AR Quick Look. Tablo duvara yerleşir; iki parmakla döndür, tek parmakla kaydır.</span>
-              <b>Android</b><span>Chrome, tarayıcı içi AR ya da Google Scene Viewer; duvara yerleşir.</span>
-            </div>
-            <details>
-              <summary>Teknik notlar</summary>
-              <p>Çerçeve derinliği 3 cm varsayıldı. Ölçek kilitli; kullanıcı büyütüp küçültemez. USDZ'deki dikey yüzey çapası ve dik geometri telefonda doğrulandı (8 Eyl 2026). Hazır odalarda ölçek, çizgiyle gösterilen mobilyanın gerçek ölçüsünden türetiliyor; mobilya duvardan öndeyse tablo bir miktar büyük görünür.</p>
-              <p id="devFiles"></p>
-            </details>
-          </div>
-        </div>
-      </section>
-
       <section class="col-cta">
         <div class="share">Paylaş: <a href="#" data-demo>WhatsApp</a><a href="#" data-demo>Facebook</a><a href="#" data-demo>Bağlantı</a></div>
         <div class="cta">
@@ -224,10 +187,74 @@ footer a{color:inherit}
       </section>
     </main>
 
+    <section class="plugin-section" id="odanda-gor">
+        <div class="plugin">
+        <div class="plugin-head">
+          <div class="eyebrow">Odanda Gör <small>Tabloyu satın almadan önce kendi duvarında gör</small></div>
+          <span class="pill" id="devicePill">…</span>
+        </div>
+        <p class="summary" style="margin:0 0 12px">Seçili: <b id="ozet"></b> · <a href="#swatches" id="degistir">Çerçeveyi ya da boyutu değiştir</a></p>
+        <div class="tabs" role="tablist">
+          <button id="tabFoto" class="on" role="tab">Fotoğrafla dene</button>
+          <button id="tabAr" role="tab">Kamerayla gör (AR)</button>
+        </div>
+
+        <div id="secFoto">
+          <div class="stage" id="stage">
+            <canvas id="cv"></canvas>
+            <div class="scale" id="scaleBadge">Ölçek tahmini</div>
+            <div class="hint" id="hint">Tabloyu sürükle. Kendi duvarın için “Fotoğraf çek”.</div>
+            <div class="calib" id="calib" hidden>
+              <div style="font-weight:600;margin-bottom:6px">İşaretlediğin mesafe gerçekte kaç cm?</div>
+              <div class="row" id="presets"></div>
+              <div class="row" style="margin-top:8px">
+                <input id="cmInput" type="number" inputmode="decimal" min="1" step="0.1" placeholder="cm" aria-label="Santimetre">
+                <button class="btn sm primary" id="calibOk">Uygula</button>
+                <button class="btn sm" id="calibCancel">İptal</button>
+              </div>
+            </div>
+          </div>
+          <div class="toolbar">
+            <label class="btn primary">Fotoğraf çek<input id="inpCam" type="file" accept="image/*" capture="environment" hidden></label>
+            <label class="btn">Galeriden seç<input id="inpGal" type="file" accept="image/*" hidden></label>
+            <button class="btn" id="btnCalib" hidden>Ölçü ver</button>
+            <button class="btn" id="btnShare">Kaydet / Paylaş</button>
+          </div>
+          <div class="label" style="margin-top:14px">Hazır odalar</div>
+          <div class="rooms" id="rooms"></div>
+          <p class="note">Tek parmakla sürükle. Kendi fotoğrafında iki parmakla büyüt ya da küçült; <b>Ölçü ver</b> ile bilinen bir uzunluğu işaretleyince tablo gerçek boyutuna kilitlenir. Fotoğraf telefondan çıkmaz; işlem tarayıcıda biter.</p>
+          <div class="row" style="margin-top:10px"><button class="btn sm" id="btnReset">Sıfırla</button></div>
+        </div>
+
+        <div id="secAr" hidden>
+          <model-viewer id="mv" ar ar-modes="webxr scene-viewer quick-look" ar-placement="wall" ar-scale="fixed"
+            camera-controls touch-action="pan-y" shadow-intensity="0.7" exposure="1" camera-orbit="0deg 82deg auto"
+            alt="Çerçeveli hat tablosu, gerçek ölçülü 3B model"></model-viewer>
+          <div class="fallback" id="fallback" hidden><img id="fallbackImg" alt="Tablo önizleme"></div>
+          <div class="toolbar">
+            <button class="btn primary" id="btnAr">Odanda Gör</button>
+            <a class="btn" id="svLink" hidden>Scene Viewer'ı doğrudan aç</a>
+          </div>
+          <p class="note" id="arStatus"></p>
+          <div id="qrBox" hidden><div id="qr"></div><p class="note" style="text-align:center;margin:8px auto 0">AR yalnızca telefonda çalışır. Kareyi telefon kamerasıyla okut.</p></div>
+          <div class="kv">
+            <b>Model ölçüsü</b><span id="modelOlcu"></span>
+            <b>iPhone</b><span>Safari, AR Quick Look. Tablo duvara yerleşir; iki parmakla döndür, tek parmakla kaydır.</span>
+            <b>Android</b><span>Chrome, tarayıcı içi AR ya da Google Scene Viewer; duvara yerleşir.</span>
+          </div>
+          <details>
+            <summary>Teknik notlar</summary>
+            <p>Çerçeve derinliği 3 cm varsayıldı. Ölçek kilitli; kullanıcı büyütüp küçültemez. USDZ'deki dikey yüzey çapası ve dik geometri telefonda doğrulandı (8 Eyl 2026). Hazır odalarda ölçek, çizgiyle gösterilen mobilyanın gerçek ölçüsünden türetiliyor; mobilya duvardan öndeyse tablo bir miktar büyük görünür.</p>
+            <p id="devFiles"></p>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <section class="pitch" id="pitch">
       <div class="eyebrow">Aşiyan Sanat için</div>
       <h2>Odanda Gör, “duvarımda nasıl durur?” sorusunu satın almadan önce cevaplar.</h2>
-      <p class="lead">Tablo alırken en büyük tereddüt ölçüdür. Müşteri 29x50 ile 45x78 arasında kararsız kalır, sepeti bırakır ya da yanlış boyu alır. Odanda Gör bu kararı ürün sayfasında, kendi duvarında verdirir. Yukarıdaki blok, sitenizin ürün sayfasına eklenecek hâlidir; Aşiyan'ın gerçek ürünü ve çerçeve seçenekleriyle çalışıyor.</p>
+      <p class="lead">Tablo alırken en büyük tereddüt ölçüdür. Müşteri 29x50 ile 45x78 arasında kararsız kalır, sepeti bırakır ya da yanlış boyu alır. Odanda Gör bu kararı ürün sayfasında, kendi duvarında verdirir. Yukarıdaki Odanda Gör bölümü, sitenizin ürün sayfasına eklenecek hâlidir; Aşiyan'ın gerçek ürünü ve çerçeve seçenekleriyle çalışıyor.</p>
       <div class="cards">
         <div class="card"><h3>Ölçü tereddüdü biter</h3><p>Müşteri iki boyutu kendi duvarında dener. Büyük boya geçiş kolaylaşır, “küçük geldi” iadeleri azalır.</p></div>
         <div class="card"><h3>Her tabloda otomatik çalışır</h3><p>Sitedeki 700'den fazla çerçeveli tabloda ek veri girişi gerekmez. Çerçeve rengi ve boyut seçimini ürün sayfasından kendisi okur.</p></div>
@@ -303,12 +330,25 @@ async function fileBlobUrl(key, type){
   const url=URL.createObjectURL(blob); state.blobUrls[key]=url; return url;
 }
 
+// Galeri (stüdyo fotoğrafı + sitenin kendi oda görselleri)
+let galleryPick=0;
+function galleryKeys(){ const k=["photo:"+state.cerceve]; Object.keys(ASSETS).filter(x=>x.startsWith("mock:"+state.cerceve+"-")).sort().forEach(x=>k.push(x)); return k; }
+function renderGallery(){
+  const keys=galleryKeys(); if(galleryPick>=keys.length) galleryPick=0;
+  $("mainImg").src=asset(keys[galleryPick]); const t=$("thumbs"); t.innerHTML="";
+  keys.forEach((k,idx)=>{ const b=document.createElement("button"); b.className=idx===galleryPick?"on":""; b.setAttribute("aria-label", idx===0?"Ürün fotoğrafı":"Oda görseli "+idx);
+    const im=document.createElement("img"); im.src=asset(k); im.alt=""; b.appendChild(im); b.onclick=()=>{ galleryPick=idx; renderGallery(); }; t.appendChild(b); });
+}
+function updateSummary(){ $("ozet").textContent=`${cerceve().ad} · ${boyut().ad} cm`; }
+$("degistir").onclick=e=>{ e.preventDefault(); document.getElementById("swatches").scrollIntoView({behavior:"smooth", block:"center"}); };
+$("odgBtn").onclick=e=>{ e.preventDefault(); document.getElementById("odanda-gor").scrollIntoView({behavior:"smooth", block:"start"}); };
+
 // Ürün kartı
 $("urunAd").textContent = URUN.ad;
 URUN.cerceveler.forEach(c=>{
   const b=document.createElement("button"); b.className="swatch"+(c.id===state.cerceve?" on":""); b.title=c.ad; b.setAttribute("aria-label", c.ad);
   const im=document.createElement("img"); im.src=asset("thumb:"+c.id); im.alt=c.ad; b.appendChild(im);
-  b.onclick=()=>{ state.cerceve=c.id; document.querySelectorAll(".swatch").forEach(s=>s.classList.toggle("on", s===b)); draw(); setModel(); toast(c.ad); };
+  b.onclick=()=>{ state.cerceve=c.id; document.querySelectorAll(".swatch").forEach(s=>s.classList.toggle("on", s===b)); galleryPick=0; renderGallery(); updateSummary(); draw(); setModel(); toast(c.ad); };
   $("swatches").appendChild(b);
   const full=new Image(); full.onload=()=>draw(); full.src=asset("img:"+c.id); state.imgs[c.id]=full;
 });
@@ -316,7 +356,7 @@ URUN.boyutlar.forEach((b,i)=>{
   const el=document.createElement("button"); el.className="chip"+(i===state.boyut?" on":"");
   el.innerHTML = b.gercek ? `${b.ad}` : `${b.ad} <small>örnek</small>`;
   el.onclick=()=>{ const eski=boyut().en; state.boyut=i; document.querySelectorAll("#boyutlar .chip").forEach(c=>c.classList.remove("on")); el.classList.add("on");
-    if(!state.pxPerCm && state.art.wPx){ state.art.wPx *= b.en/eski; } draw(); $("modelOlcu").textContent = modelOlcuMetni(); };
+    if(!state.pxPerCm && state.art.wPx){ state.art.wPx *= b.en/eski; } updateSummary(); draw(); $("modelOlcu").textContent = modelOlcuMetni(); };
   $("boyutlar").appendChild(el);
 });
 function modelOlcuMetni(){ const c=cerceve(); return `${fmtCm(50)} × ${fmtCm(50/c.aspect)} × 3 cm. AR'da yalnızca gerçek boyut (29x50).`; }
@@ -518,6 +558,7 @@ else if(isAndroid){ $("devicePill").textContent="Android · AR"; $("arStatus").t
 else { $("devicePill").textContent="Bilgisayar · 3B önizleme"; $("arStatus").textContent = VARIANT==="hosted" ? "Bilgisayarda yalnızca 3B önizleme çalışır. AR için sayfayı telefonda aç:" : "Bilgisayarda yalnızca 3B önizleme çalışır. AR için bu sayfanın bağlantısını telefonunda aç.";
   if(VARIANT==="hosted"){ $("qrBox").hidden=false; try{ new QRCode($("qr"),{text:location.href,width:150,height:150,correctLevel:QRCode.CorrectLevel.M}); }catch(e){} } }
 
+renderGallery(); updateSummary();
 fitCanvas();
 selectRoom("salon");
 </script>

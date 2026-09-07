@@ -10,6 +10,12 @@ for s in ("eskitme-altin", "islemeli-altin", "eskitme-siyah"):
     bundle[f"thumb:{s}"] = data_uri(f"{DST}/assets/{s}-thumb.webp", "image/webp")
     bundle[f"glb:{s}"] = data_uri(f"{DST}/models/{s}.glb", "model/gltf-binary")
     bundle[f"usdz:{s}"] = data_uri(f"{DST}/models/{s}.usdz", "model/vnd.usdz+zip")
+import glob as _glob
+for s in ("eskitme-altin", "islemeli-altin", "eskitme-siyah"):
+    bundle[f"photo:{s}"] = data_uri(f"{DST}/assets/foto-{s}.webp", "image/webp")
+    for fp in sorted(_glob.glob(f"{DST}/assets/mock-{s}-*.webp")):
+        n = fp.rsplit("-",1)[1].split(".")[0]
+        bundle[f"mock:{s}-{n}"] = data_uri(fp, "image/webp")
 for r in ("salon", "ofis", "yemek"):
     fp = f"{DST}/assets/oda-{r}.webp"
     if not os.path.exists(fp): raise SystemExit(f"EKSIK: {fp} (oda fotografi)")
@@ -28,7 +34,7 @@ open(f"{SP}/odanda-gor.html", "w", encoding="utf-8").write(art)
 paths = {}
 for k in bundle:
     kind, name = k.split(":", 1)
-    paths[k] = {"img": f"assets/{name}.webp", "thumb": f"assets/{name}-thumb.webp", "glb": f"models/{name}.glb", "usdz": f"models/{name}.usdz", "room": f"assets/oda-{name}.webp"}[kind]
+    paths[k] = {"img": f"assets/{name}.webp", "thumb": f"assets/{name}-thumb.webp", "glb": f"models/{name}.glb", "usdz": f"models/{name}.usdz", "room": f"assets/oda-{name}.webp", "photo": f"assets/foto-{name}.webp", "mock": f"assets/mock-{name}.webp"}[kind]
 hosted = ('<!doctype html>\n<html lang="tr">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="theme-color" content="#1B2A49">\n' 
           + render("hosted", paths) + '\n</body>\n</html>\n')
 hosted = hosted.replace("</style>\n\n<div class=\"site\">", "</style>\n</head>\n<body>\n<div class=\"site\">", 1)
