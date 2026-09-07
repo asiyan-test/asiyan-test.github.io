@@ -123,7 +123,7 @@ footer a{color:inherit}
     </div>
     <div class="label">Hazır odalar</div>
     <div class="rooms" id="rooms"></div>
-    <p class="note">Tek parmakla sürükle. Kendi fotoğrafında ölçü verilmemişse iki parmakla büyüt ya da küçült. <b>Ölçü ver</b> ile fotoğraftaki bilinen bir uzunluğu işaretleyince tablo gerçek boyutuna kilitlenir. Fotoğraf telefondan çıkmaz; işlem tarayıcıda biter.</p>
+    <p class="note">Hazır odalarda ölçek, üstünde yazan mobilya ölçüsüne göre: koltuk 220 cm, arka dolap 240 cm, yemek masası 180 cm. Tek parmakla sürükle. Kendi fotoğrafında ölçü verilmemişse iki parmakla büyüt ya da küçült. <b>Ölçü ver</b> ile fotoğraftaki bilinen bir uzunluğu işaretleyince tablo gerçek boyutuna kilitlenir. Fotoğraf telefondan çıkmaz; işlem tarayıcıda biter.</p>
     <div class="row" style="margin-top:10px"><button class="btn sm" id="btnReset">Sıfırla</button></div>
   </section>
 
@@ -145,7 +145,7 @@ footer a{color:inherit}
     </div>
     <details>
       <summary>Geliştirici notları</summary>
-      <p>Çerçeve derinliği 3 cm varsayıldı. Ölçek kilitli; kullanıcı büyütüp küçültemez. USDZ'deki dikey yüzey çapası ve dik geometri telefonda doğrulandı (8 Eyl 2026). Hazır odalarda ölçek, 2,70 m tavan varsayımıyla duvar yüksekliğinden türetildi; bu yüzden "yaklaşık" deniyor.</p>
+      <p>Çerçeve derinliği 3 cm varsayıldı. Ölçek kilitli; kullanıcı büyütüp küçültemez. USDZ'deki dikey yüzey çapası ve dik geometri telefonda doğrulandı (8 Eyl 2026). Hazır odalarda ölçek, çizgiyle gösterilen mobilyanın gerçek ölçüsünden türetiliyor (ROOMS.ref). Mobilya duvardan öndeyse tablo bir miktar büyük görünür; yemek masası buna örnek.</p>
       <p id="devFiles"></p>
     </details>
   </section>
@@ -176,13 +176,14 @@ const URUN = {
     {ad:"45x78", en:78}
   ]
 };
-// Hazır odalar: fotoğraf + duvar düzlemi ölçeği. pxPerCm fotoğrafın kendi piksellerinde (1280 px taban);
-// duvar yüksekliğinden 2,70 m tavan varsayımıyla (ofiste 2,80 m) türetildi. art: tablonun varsayılan merkezi (fotoğraf pikseli).
+// Hazır odalar: fotoğraf + bilinen bir mobilya ölçüsü. ref: fotoğrafta (1280 px taban) x1..x2 arası mobilya, gerçekte cm.
+// Ölçek = (x2-x1)/cm. y: ölçü çizgisinin çizileceği satır. art: tablonun varsayılan merkezi (fotoğraf pikseli).
 const ROOMS = [
-  {id:"salon", ad:"Salon", img:"room:salon", pxPerCm:3.40, art:{x:640, y:660}},
-  {id:"ofis", ad:"Ofis", img:"room:ofis", pxPerCm:3.10, art:{x:640, y:550}},
-  {id:"yemek", ad:"Yemek odası", img:"room:yemek", pxPerCm:3.30, art:{x:650, y:485}}
+  {id:"salon", ad:"Salon", img:"room:salon", ref:{ad:"Koltuk", cm:220, x1:186, x2:1100, y:1100}, art:{x:640, y:650}},
+  {id:"ofis", ad:"Ofis", img:"room:ofis", ref:{ad:"Arka dolap", cm:240, x1:255, x2:1005, y:712}, art:{x:640, y:548}},
+  {id:"yemek", ad:"Yemek odası", img:"room:yemek", ref:{ad:"Masa", cm:180, x1:245, x2:1060, y:802}, art:{x:650, y:485}}
 ];
+function roomPxPerCm(r){ return (r.ref.x2-r.ref.x1)/r.ref.cm; }
 const PRESETS = [["A4 uzun kenar", 29.7], ["Kapı", 200], ["Koltuk", 220], ["Yatak", 160]];
 
 const state = {cerceve:"eskitme-altin", boyut:0, bg:null, bgKind:null, room:null, pxPerCm:null,
@@ -249,7 +250,16 @@ window.addEventListener("resize", ()=>{ if(!$("secFoto").hidden) fitCanvas(); })
 
 function roomImg(){ const r=ROOMS.find(r=>r.id===state.room); return r && state.imgs[r.img]; }
 function roomFit(w,h){ const im=roomImg(); if(!im || !im.naturalWidth) return null; const sc=Math.max(w/im.naturalWidth, h/im.naturalHeight); return {sc, ox:(w-im.naturalWidth*sc)/2, oy:(h-im.naturalHeight*sc)/2, im}; }
-function placeInRoom(){ const r=ROOMS.find(r=>r.id===state.room), f=roomFit(cssW,cssH); if(!r||!f) return; const k=f.im.naturalWidth/1280; state.art.cx=f.ox+r.art.x*k*f.sc; state.art.cy=f.oy+r.art.y*k*f.sc; state.pxPerCm=r.pxPerCm*k*f.sc; }
+function placeInRoom(){ const r=ROOMS.find(r=>r.id===state.room), f=roomFit(cssW,cssH); if(!r||!f) return; const k=f.im.naturalWidth/1280; state.art.cx=f.ox+r.art.x*k*f.sc; state.art.cy=f.oy+r.art.y*k*f.sc; state.pxPerCm=roomPxPerCm(r)*k*f.sc; }
+function drawDimension(r,f){
+  const k=f.im.naturalWidth/1280*f.sc, X=v=>f.ox+v*k, Y=v=>f.oy+v*k;
+  const x1=X(r.ref.x1), x2=X(r.ref.x2), y=Y(r.ref.y), t=6;
+  ctx.save(); ctx.strokeStyle="rgba(21,33,59,.85)"; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.moveTo(x1,y); ctx.lineTo(x2,y); ctx.moveTo(x1,y-t); ctx.lineTo(x1,y+t); ctx.moveTo(x2,y-t); ctx.lineTo(x2,y+t); ctx.stroke();
+  const txt=`${r.ref.ad} ${fmtCm(r.ref.cm)} cm`; ctx.font="700 12px Manrope, -apple-system, sans-serif"; const w=ctx.measureText(txt).width+16, h=22, cx=(x1+x2)/2;
+  ctx.fillStyle="rgba(255,255,255,.92)"; ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(cx-w/2,y-h/2,w,h,11); else ctx.rect(cx-w/2,y-h/2,w,h); ctx.fill();
+  ctx.fillStyle="#15213B"; ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText(txt,cx,y+0.5); ctx.restore();
+}
 
 function artSize(){ const c=cerceve(); const w = state.pxPerCm ? boyut().en*state.pxPerCm : state.art.wPx; return {w, h:w/c.aspect}; }
 
@@ -261,7 +271,7 @@ function draw(){
     ctx.drawImage(im,(cssW-w)/2,(cssH-h)/2,w,h);
   } else if(state.bgKind==="room"){
     const r=ROOMS.find(r=>r.id===state.room), f=roomFit(cssW,cssH);
-    if(f){ ctx.drawImage(f.im, f.ox, f.oy, f.im.naturalWidth*f.sc, f.im.naturalHeight*f.sc); state.pxPerCm=r.pxPerCm*(f.im.naturalWidth/1280)*f.sc; }
+    if(f){ ctx.drawImage(f.im, f.ox, f.oy, f.im.naturalWidth*f.sc, f.im.naturalHeight*f.sc); state.pxPerCm=roomPxPerCm(r)*(f.im.naturalWidth/1280)*f.sc; drawDimension(r,f); }
     else { ctx.fillStyle="#d9d3c8"; ctx.fillRect(0,0,cssW,cssH); }
   } else {
     const g=ctx.createLinearGradient(0,0,0,cssH); g.addColorStop(0,"#e9e3d6"); g.addColorStop(1,"#d3c9b6"); ctx.fillStyle=g; ctx.fillRect(0,0,cssW,cssH);
@@ -280,7 +290,7 @@ function draw(){
     ctx.restore();
   }
   const b=$("scaleBadge"), c=cerceve(), en=boyut().en;
-  if(state.bgKind==="room"){ b.textContent=`Yaklaşık gerçek ölçek · tablo ${fmtCm(en)}×${fmtCm(en/c.aspect)} cm`; b.className="scale ok"; }
+  if(state.bgKind==="room"){ const r=ROOMS.find(r=>r.id===state.room); b.textContent=`Ölçek: ${r.ref.ad.toLowerCase()} ${fmtCm(r.ref.cm)} cm · tablo ${fmtCm(en)}×${fmtCm(en/c.aspect)} cm`; b.className="scale ok"; }
   else if(state.pxPerCm){ b.textContent=`Gerçek ölçek · tablo ${fmtCm(en)}×${fmtCm(en/c.aspect)} cm`; b.className="scale ok"; }
   else { b.textContent="Ölçek tahmini · iki parmakla ayarla ya da Ölçü ver"; b.className="scale"; }
 }
@@ -289,7 +299,7 @@ function draw(){
 function selectRoom(id){
   state.bgKind="room"; state.room=id; state.bg=null; state.calib={active:false,pts:[]}; $("calib").hidden=true;
   document.querySelectorAll(".room").forEach(x=>x.classList.toggle("on", x.dataset.id===id));
-  placeInRoom(); draw(); hint("Tabloyu sürükleyip yerini ayarla. Oda ve tablo yaklaşık gerçek ölçekte.");
+  placeInRoom(); draw(); hint("Tabloyu sürükleyip yerini ayarla. Ölçek, çizgideki mobilya ölçüsüne göre.");
 }
 ROOMS.forEach(r=>{
   const el=document.createElement("button"); el.className="room"; el.dataset.id=r.id;
