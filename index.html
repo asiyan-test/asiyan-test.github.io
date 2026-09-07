@@ -60,7 +60,7 @@ h1{font:600 16px/1.35 var(--font-display);margin:0 0 8px;text-wrap:balance}
 .rooms{display:flex;gap:8px;overflow-x:auto;padding:2px 0 6px}
 .room{flex:0 0 auto;border:2px solid var(--line);border-radius:10px;background:var(--surface);padding:0;cursor:pointer;overflow:hidden;width:112px}
 .room.on{border-color:var(--accent)}
-.room canvas{width:112px;height:80px;display:block}
+.room img{width:112px;height:80px;display:block;object-fit:cover}
 .room span{display:block;font-size:12px;font-weight:700;padding:6px;color:var(--ink)}
 .note{font-size:12.5px;color:var(--muted);margin:10px 0 0;max-width:65ch}
 .calib{position:absolute;left:10px;right:10px;bottom:10px;background:var(--surface);color:var(--ink);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
@@ -111,7 +111,7 @@ footer a{color:inherit}
     <div class="stage" id="stage">
       <canvas id="cv"></canvas>
       <div class="scale" id="scaleBadge">Ölçek tahmini</div>
-      <div class="hint" id="hint">Duvarının fotoğrafını çek ya da hazır bir oda seç.</div>
+      <div class="hint" id="hint">Tabloyu sürükle. Kendi duvarın için “Fotoğraf çek”.</div>
       <div class="calib" id="calib" hidden>
         <div style="font-weight:700;margin-bottom:6px">İşaretlediğin mesafe gerçekte kaç cm?</div>
         <div class="row" id="presets"></div>
@@ -128,9 +128,9 @@ footer a{color:inherit}
       <button class="btn" id="btnCalib">Ölçü ver</button>
       <button class="btn" id="btnShare">Kaydet / Paylaş</button>
     </div>
-    <div class="label">Hazır odalar, gerçek ölçekli</div>
+    <div class="label">Hazır odalar</div>
     <div class="rooms" id="rooms"></div>
-    <p class="note">Tek parmakla sürükle. Ölçü verilmemişse iki parmakla büyüt ya da küçült. <b>Ölçü ver</b> ile fotoğraftaki bilinen bir uzunluğu işaretleyince tablo gerçek boyutuna kilitlenir. Fotoğraf telefondan çıkmaz; işlem tarayıcıda biter.</p>
+    <p class="note">Tek parmakla sürükle. Kendi fotoğrafında ölçü verilmemişse iki parmakla büyüt ya da küçült. <b>Ölçü ver</b> ile fotoğraftaki bilinen bir uzunluğu işaretleyince tablo gerçek boyutuna kilitlenir. Fotoğraf telefondan çıkmaz; işlem tarayıcıda biter.</p>
     <div class="row" style="margin-top:10px"><button class="btn sm" id="btnReset">Sıfırla</button></div>
   </section>
 
@@ -147,12 +147,12 @@ footer a{color:inherit}
     <div id="qrBox" hidden><div id="qr"></div><p class="note" style="text-align:center;margin:8px auto 0">AR yalnızca telefonda çalışır. Kareyi telefon kamerasıyla okut.</p></div>
     <div class="kv">
       <b>Model ölçüsü</b><span id="modelOlcu"></span>
-      <b>iPhone</b><span>Safari, AR Quick Look. USDZ dosyasında dikey yüzey çapası var; tablo duvara yerleşir.</span>
+      <b>iPhone</b><span>Safari, AR Quick Look. Tablo duvara yerleşir; iki parmakla döndür, tek parmakla kaydır.</span>
       <b>Android</b><span>Chrome, tarayıcı içi AR (WebXR) ya da Google Scene Viewer; duvara yerleşir.</span>
     </div>
     <details>
       <summary>Geliştirici notları</summary>
-      <p>Çerçeve derinliği 3 cm varsayıldı. Ölçek kilitli; kullanıcı büyütüp küçültemez. iPhone'da tablo duvara dik değil de yatık görünürse yön varsayımı ters demektir; şunu dene: <a href="#" id="yonB">Yön B testi (yatık USDZ)</a>.</p>
+      <p>Çerçeve derinliği 3 cm varsayıldı. Ölçek kilitli; kullanıcı büyütüp küçültemez. USDZ'deki dikey yüzey çapası ve dik geometri telefonda doğrulandı (8 Eyl 2026). Hazır odalarda ölçek, 2,70 m tavan varsayımıyla duvar yüksekliğinden türetildi; bu yüzden "yaklaşık" deniyor.</p>
       <p id="devFiles"></p>
     </details>
   </section>
@@ -164,7 +164,7 @@ footer a{color:inherit}
 
 <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.1.0/dist/model-viewer.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script id="assets" type="application/json">{"img:eskitme-altin": "assets/eskitme-altin.webp", "thumb:eskitme-altin": "assets/eskitme-altin-thumb.webp", "glb:eskitme-altin": "models/eskitme-altin.glb", "usdz:eskitme-altin": "models/eskitme-altin.usdz", "img:islemeli-altin": "assets/islemeli-altin.webp", "thumb:islemeli-altin": "assets/islemeli-altin-thumb.webp", "glb:islemeli-altin": "models/islemeli-altin.glb", "usdz:islemeli-altin": "models/islemeli-altin.usdz", "img:eskitme-siyah": "assets/eskitme-siyah.webp", "thumb:eskitme-siyah": "assets/eskitme-siyah-thumb.webp", "glb:eskitme-siyah": "models/eskitme-siyah.glb", "usdz:eskitme-siyah": "models/eskitme-siyah.usdz", "usdz:eskitme-altin-yatik": "models/eskitme-altin-yatik.usdz"}</script>
+<script id="assets" type="application/json">{"img:eskitme-altin": "assets/eskitme-altin.webp", "thumb:eskitme-altin": "assets/eskitme-altin-thumb.webp", "glb:eskitme-altin": "models/eskitme-altin.glb", "usdz:eskitme-altin": "models/eskitme-altin.usdz", "img:islemeli-altin": "assets/islemeli-altin.webp", "thumb:islemeli-altin": "assets/islemeli-altin-thumb.webp", "glb:islemeli-altin": "models/islemeli-altin.glb", "usdz:islemeli-altin": "models/islemeli-altin.usdz", "img:eskitme-siyah": "assets/eskitme-siyah.webp", "thumb:eskitme-siyah": "assets/eskitme-siyah-thumb.webp", "glb:eskitme-siyah": "models/eskitme-siyah.glb", "usdz:eskitme-siyah": "models/eskitme-siyah.usdz", "room:salon": "assets/oda-salon.webp", "room:ofis": "assets/oda-ofis.webp", "room:yemek": "assets/oda-yemek.webp"}</script>
 <script>
 const VARIANT = "hosted";
 const ASSETS = JSON.parse(document.getElementById("assets").textContent);
@@ -183,11 +183,12 @@ const URUN = {
     {ad:"45x78", en:78}
   ]
 };
-const ROOM_W = 400, ROOM_H = 300;
+// Hazır odalar: fotoğraf + duvar düzlemi ölçeği. pxPerCm fotoğrafın kendi piksellerinde (1280 px taban);
+// duvar yüksekliğinden 2,70 m tavan varsayımıyla (ofiste 2,80 m) türetildi. art: tablonun varsayılan merkezi (fotoğraf pikseli).
 const ROOMS = [
-  {id:"salon", ad:"Salon", ref:"Koltuk 220 cm"},
-  {id:"yatak", ad:"Yatak odası", ref:"Yatak 160 cm"},
-  {id:"ofis", ad:"Çalışma odası", ref:"Masa 140 cm"}
+  {id:"salon", ad:"Salon", img:"room:salon", pxPerCm:3.40, art:{x:640, y:660}},
+  {id:"ofis", ad:"Ofis", img:"room:ofis", pxPerCm:3.10, art:{x:640, y:550}},
+  {id:"yemek", ad:"Yemek odası", img:"room:yemek", pxPerCm:3.30, art:{x:650, y:485}}
 ];
 const PRESETS = [["A4 uzun kenar", 29.7], ["Kapı", 200], ["Koltuk", 220], ["Yatak", 160]];
 
@@ -202,7 +203,6 @@ let toastT;
 function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),2800); }
 function hint(msg){ $("hint").textContent = msg; $("hint").hidden = !msg; }
 const dist = (a,b) => Math.hypot(a.x-b.x, a.y-b.y);
-function rr(c,x,y,w,h,r){ c.beginPath(); if(c.roundRect){ c.roundRect(x,y,w,h,r); } else { c.rect(x,y,w,h); } c.closePath(); }
 function cerceve(){ return URUN.cerceveler.find(c=>c.id===state.cerceve); }
 function boyut(){ return URUN.boyutlar[state.boyut]; }
 function fmtCm(v){ return v.toLocaleString("tr-TR",{maximumFractionDigits:1}); }
@@ -254,43 +254,9 @@ function fitCanvas(){
 }
 window.addEventListener("resize", ()=>{ if(!$("secFoto").hidden) fitCanvas(); });
 
-function roomScale(w,h){ const s=Math.max(w/ROOM_W, h/ROOM_H); return {s, ox:(w-ROOM_W*s)/2, oy:(h-ROOM_H*s)/2}; }
-function placeInRoom(){ const {s,ox,oy}=roomScale(cssW,cssH); state.art.cx=ox+200*s; state.art.cy=oy+118*s; }
-
-function drawRoom(c,id,w,h){
-  const {s,ox,oy}=roomScale(w,h); const X=v=>ox+v*s, Y=v=>oy+v*s, S=v=>v*s;
-  const wall = {salon:["#e2d5bd","#cdbc9c"], yatak:["#d7dedb","#bcc7c3"], ofis:["#e8e5dd","#d2cdc1"]}[id];
-  let g=c.createLinearGradient(0,Y(0),0,Y(250)); g.addColorStop(0,wall[0]); g.addColorStop(1,wall[1]); c.fillStyle=g; c.fillRect(X(0),Y(0),S(400),S(250));
-  c.fillStyle="#f4f0e7"; c.fillRect(X(0),Y(244),S(400),S(6));
-  g=c.createLinearGradient(0,Y(250),0,Y(300)); g.addColorStop(0,"#b98f5e"); g.addColorStop(1,"#946d43"); c.fillStyle=g; c.fillRect(X(0),Y(250),S(400),S(50));
-  c.strokeStyle="rgba(0,0,0,.08)"; c.lineWidth=1; for(let x=0;x<=400;x+=40){ c.beginPath(); c.moveTo(X(x),Y(250)); c.lineTo(X(x-30),Y(300)); c.stroke(); }
-  c.save(); c.shadowColor="rgba(0,0,0,.18)"; c.shadowBlur=S(6); c.shadowOffsetY=S(2);
-  if(id==="salon"){
-    c.fillStyle="#7f93a3"; rr(c,X(90),Y(168),S(220),S(34),S(8)); c.fill();
-    c.fillStyle="#8ea1b0"; rr(c,X(90),Y(198),S(220),S(46),S(8)); c.fill();
-    c.fillStyle="#7f93a3"; rr(c,X(78),Y(180),S(18),S(64),S(8)); c.fill(); rr(c,X(304),Y(180),S(18),S(64),S(8)); c.fill();
-    c.fillStyle="#d9c7a7"; rr(c,X(110),Y(176),S(48),S(30),S(6)); c.fill(); c.fillStyle="#bfae8c"; rr(c,X(242),Y(176),S(48),S(30),S(6)); c.fill();
-    c.fillStyle="#5b4632"; c.fillRect(X(96),Y(244),S(6),S(8)); c.fillRect(X(298),Y(244),S(6),S(8));
-    c.fillStyle="#6f8f5a"; c.beginPath(); c.ellipse(X(360),Y(205),S(22),S(30),0,0,Math.PI*2); c.fill(); c.fillStyle="#b3835a"; rr(c,X(348),Y(228),S(24),S(22),S(4)); c.fill();
-  } else if(id==="yatak"){
-    c.fillStyle="#6a5646"; rr(c,X(120),Y(150),S(160),S(66),S(10)); c.fill();
-    c.fillStyle="#f1eee6"; rr(c,X(108),Y(200),S(184),S(44),S(8)); c.fill();
-    c.fillStyle="#c9c2b3"; rr(c,X(108),Y(212),S(184),S(14),S(4)); c.fill();
-    c.fillStyle="#fff"; rr(c,X(136),Y(186),S(56),S(20),S(6)); c.fill(); rr(c,X(208),Y(186),S(56),S(20),S(6)); c.fill();
-    c.fillStyle="#8a7159"; rr(c,X(56),Y(200),S(44),S(44),S(4)); c.fill(); rr(c,X(300),Y(200),S(44),S(44),S(4)); c.fill();
-    c.fillStyle="#e9dfc8"; rr(c,X(66),Y(176),S(24),S(22),S(6)); c.fill(); rr(c,X(310),Y(176),S(24),S(22),S(6)); c.fill();
-  } else {
-    c.fillStyle="#6b4f3a"; rr(c,X(130),Y(174),S(140),S(6),S(2)); c.fill();
-    c.fillStyle="#4a3728"; c.fillRect(X(136),Y(180),S(5),S(64)); c.fillRect(X(259),Y(180),S(5),S(64));
-    c.fillStyle="#2a2a2e"; rr(c,X(170),Y(138),S(60),S(34),S(3)); c.fill(); c.fillRect(X(197),Y(172),S(6),S(4));
-    c.fillStyle="#3b4a5a"; rr(c,X(178),Y(196),S(44),S(48),S(8)); c.fill(); c.fillStyle="#2f3b48"; rr(c,X(186),Y(160),S(28),S(40),S(8)); c.fill();
-    c.fillStyle="#8a7159"; c.fillRect(X(300),Y(120),S(70),S(4)); c.fillStyle="#a56b4e"; c.fillRect(X(306),Y(102),S(10),S(18)); c.fillStyle="#5c7a8c"; c.fillRect(X(318),Y(98),S(8),S(22)); c.fillStyle="#c2a35c"; c.fillRect(X(328),Y(106),S(12),S(14));
-  }
-  c.restore();
-  c.fillStyle="rgba(31,26,20,.55)"; c.font=`600 ${Math.max(10,S(7))}px Manrope, -apple-system, sans-serif`; c.textAlign="center";
-  c.fillText(ROOMS.find(r=>r.id===id).ref, X(200), Y(262));
-  return s;
-}
+function roomImg(){ const r=ROOMS.find(r=>r.id===state.room); return r && state.imgs[r.img]; }
+function roomFit(w,h){ const im=roomImg(); if(!im || !im.naturalWidth) return null; const sc=Math.max(w/im.naturalWidth, h/im.naturalHeight); return {sc, ox:(w-im.naturalWidth*sc)/2, oy:(h-im.naturalHeight*sc)/2, im}; }
+function placeInRoom(){ const r=ROOMS.find(r=>r.id===state.room), f=roomFit(cssW,cssH); if(!r||!f) return; const k=f.im.naturalWidth/1280; state.art.cx=f.ox+r.art.x*k*f.sc; state.art.cy=f.oy+r.art.y*k*f.sc; state.pxPerCm=r.pxPerCm*k*f.sc; }
 
 function artSize(){ const c=cerceve(); const w = state.pxPerCm ? boyut().en*state.pxPerCm : state.art.wPx; return {w, h:w/c.aspect}; }
 
@@ -301,7 +267,9 @@ function draw(){
     const im=state.bg, s=Math.max(cssW/im.naturalWidth, cssH/im.naturalHeight), w=im.naturalWidth*s, h=im.naturalHeight*s;
     ctx.drawImage(im,(cssW-w)/2,(cssH-h)/2,w,h);
   } else if(state.bgKind==="room"){
-    state.pxPerCm = drawRoom(ctx,state.room,cssW,cssH);
+    const r=ROOMS.find(r=>r.id===state.room), f=roomFit(cssW,cssH);
+    if(f){ ctx.drawImage(f.im, f.ox, f.oy, f.im.naturalWidth*f.sc, f.im.naturalHeight*f.sc); state.pxPerCm=r.pxPerCm*(f.im.naturalWidth/1280)*f.sc; }
+    else { ctx.fillStyle="#d9d3c8"; ctx.fillRect(0,0,cssW,cssH); }
   } else {
     const g=ctx.createLinearGradient(0,0,0,cssH); g.addColorStop(0,"#e9e3d6"); g.addColorStop(1,"#d3c9b6"); ctx.fillStyle=g; ctx.fillRect(0,0,cssW,cssH);
     ctx.fillStyle="#f4f0e7"; ctx.fillRect(0,cssH*0.86,cssW,cssH*0.02); ctx.fillStyle="#b48d61"; ctx.fillRect(0,cssH*0.88,cssW,cssH*0.12);
@@ -319,19 +287,24 @@ function draw(){
     ctx.restore();
   }
   const b=$("scaleBadge"), c=cerceve(), en=boyut().en;
-  if(state.bgKind==="room"){ b.textContent=`Gerçek ölçek · oda 1:1 · tablo ${fmtCm(en)}×${fmtCm(en/c.aspect)} cm`; b.className="scale ok"; }
+  if(state.bgKind==="room"){ b.textContent=`Yaklaşık gerçek ölçek · tablo ${fmtCm(en)}×${fmtCm(en/c.aspect)} cm`; b.className="scale ok"; }
   else if(state.pxPerCm){ b.textContent=`Gerçek ölçek · tablo ${fmtCm(en)}×${fmtCm(en/c.aspect)} cm`; b.className="scale ok"; }
   else { b.textContent="Ölçek tahmini · iki parmakla ayarla ya da Ölçü ver"; b.className="scale"; }
 }
 
 // Hazır odalar
+function selectRoom(id){
+  state.bgKind="room"; state.room=id; state.bg=null; state.calib={active:false,pts:[]}; $("calib").hidden=true;
+  document.querySelectorAll(".room").forEach(x=>x.classList.toggle("on", x.dataset.id===id));
+  placeInRoom(); draw(); hint("Tabloyu sürükleyip yerini ayarla. Oda ve tablo yaklaşık gerçek ölçekte.");
+}
 ROOMS.forEach(r=>{
-  const el=document.createElement("button"); el.className="room"; const c2=document.createElement("canvas"); c2.width=224; c2.height=160;
-  const cx2=c2.getContext("2d"); cx2.setTransform(2,0,0,2,0,0); drawRoom(cx2,r.id,112,80);
-  el.appendChild(c2); const sp=document.createElement("span"); sp.textContent=r.ad; el.appendChild(sp);
-  el.onclick=()=>{ state.bgKind="room"; state.room=r.id; state.bg=null; state.calib={active:false,pts:[]}; $("calib").hidden=true;
-    document.querySelectorAll(".room").forEach(x=>x.classList.toggle("on", x===el)); placeInRoom(); draw(); hint("Tabloyu sürükleyip yerini ayarla. Oda ve tablo gerçek ölçekte."); };
+  const el=document.createElement("button"); el.className="room"; el.dataset.id=r.id;
+  const im=document.createElement("img"); im.src=asset(r.img); im.alt=r.ad; el.appendChild(im);
+  const sp=document.createElement("span"); sp.textContent=r.ad; el.appendChild(sp);
+  el.onclick=()=>selectRoom(r.id);
   $("rooms").appendChild(el);
+  const full=new Image(); full.onload=()=>{ if(state.room===r.id){ placeInRoom(); draw(); } }; full.src=asset(r.img); state.imgs[r.img]=full;
 });
 
 // Fotoğraf
@@ -358,7 +331,7 @@ cv.addEventListener("pointerdown",e=>{
 cv.addEventListener("pointermove",e=>{
   if(!pointers.has(e.pointerId)) return; const p=pos(e); pointers.set(e.pointerId,p);
   if(pinch && pointers.size===2){
-    if(state.pxPerCm){ if(!lockToastShown){ toast("Boyut gerçek ölçeğe kilitli. Serbest bırakmak için Sıfırla."); lockToastShown=true; } return; }
+    if(state.pxPerCm){ if(!lockToastShown){ toast("Boyut gerçek ölçeğe kilitli. Kendi fotoğrafında Sıfırla ile serbest bırakabilirsin."); lockToastShown=true; } return; }
     const [a,b]=[...pointers.values()]; state.art.wPx=Math.max(40, Math.min(cssW*1.6, pinch.w0*dist(a,b)/pinch.d0)); draw();
   } else if(drag && pointers.size===1){ state.art.cx=p.x-drag.dx; state.art.cy=p.y-drag.dy; draw(); }
 });
@@ -368,7 +341,7 @@ cv.addEventListener("pointerup",up); cv.addEventListener("pointercancel",up);
 // Ölçü verme
 PRESETS.forEach(([ad,cm])=>{ const b=document.createElement("button"); b.className="chip"; b.innerHTML=`${ad} <small>${fmtCm(cm)}</small>`; b.onclick=()=>{ $("cmInput").value=cm; }; $("presets").appendChild(b); });
 $("btnCalib").onclick=()=>{
-  if(state.bgKind==="room"){ toast("Hazır odalar zaten gerçek ölçekte."); return; }
+  if(state.bgKind==="room"){ toast("Hazır odalar zaten ölçekli. Ölçü verme kendi fotoğrafın için."); return; }
   if(!state.bgKind){ toast("Önce bir fotoğraf yükle."); return; }
   state.calib={active:true,pts:[]}; $("calib").hidden=true; draw(); hint("Boyutunu bildiğin bir şeyin iki ucuna dokun: A4 kâğıt, kapı, koltuk…");
 };
@@ -380,8 +353,8 @@ $("calibOk").onclick=()=>{
   state.pxPerCm=d/cm; state.calib={active:false,pts:[]}; $("calib").hidden=true; lockToastShown=false; draw();
   hint(""); toast(`Gerçek ölçek ayarlandı: tablo ${fmtCm(boyut().en)} cm genişlikte`);
 };
-$("btnReset").onclick=()=>{ state.bg=null; state.bgKind=null; state.room=null; state.pxPerCm=null; state.calib={active:false,pts:[]}; $("calib").hidden=true;
-  document.querySelectorAll(".room").forEach(x=>x.classList.remove("on")); state.art.cx=cssW/2; state.art.cy=cssH*0.42; state.art.wPx=cssW*0.42; draw(); hint("Duvarının fotoğrafını çek ya da hazır bir oda seç."); };
+$("btnReset").onclick=()=>{ state.bg=null; state.pxPerCm=null; state.calib={active:false,pts:[]}; $("calib").hidden=true; lockToastShown=false;
+  state.art.cx=cssW/2; state.art.cy=cssH*0.42; state.art.wPx=cssW*0.42; selectRoom("salon"); };
 
 // Kaydet / paylaş
 $("btnShare").onclick=()=>{
@@ -439,7 +412,6 @@ $("btnAr").onclick=async()=>{
   }
   toast("AR yalnızca telefonda çalışır. Bu sayfayı telefonunda aç."); $("qrBox").hidden = (VARIANT!=="hosted");
 };
-$("yonB").onclick=async e=>{ e.preventDefault(); if(!isIOS){ toast("Bu test yalnızca iPhone ve iPad için."); return; } openQuickLook(await prefetchUsdz("eskitme-altin-yatik")); };
 
 if(isIOS){ $("devicePill").textContent="iPhone · Quick Look"; $("arStatus").textContent="Odanda Gör'e bas, kamerayı duvara doğrult ve telefonu yavaşça hareket ettir. Tablo duvara gerçek boyutuyla yerleşir."; }
 else if(isAndroid){ $("devicePill").textContent="Android · AR"; $("arStatus").textContent = VARIANT==="hosted" ? "Odanda Gör'e bas; kamera açılır, duvarı tarayıp tabloyu yerleştir. Açılmazsa 'Scene Viewer'ı doğrudan aç'ı dene." : "Bu tek dosyalık sürümde Android AR açılamaz: sayfa çerçevesi kameraya ve AR'a izin vermiyor. Barındırılan (GitHub Pages) sürümde Google Scene Viewer ile çalışır."; if(VARIANT==="hosted") $("svLink").hidden=false; }
@@ -447,6 +419,7 @@ else { $("devicePill").textContent="Bilgisayar · 3B önizleme"; $("arStatus").t
   if(VARIANT==="hosted"){ $("qrBox").hidden=false; try{ new QRCode($("qr"),{text:location.href,width:150,height:150,correctLevel:QRCode.CorrectLevel.M}); }catch(e){} } }
 
 fitCanvas();
+selectRoom("salon");
 </script>
 
 </body>
