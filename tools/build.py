@@ -29,9 +29,9 @@ paths = {}
 for k in bundle:
     kind, name = k.split(":", 1)
     paths[k] = {"img": f"assets/{name}.webp", "thumb": f"assets/{name}-thumb.webp", "glb": f"models/{name}.glb", "usdz": f"models/{name}.usdz", "room": f"assets/oda-{name}.webp"}[kind]
-hosted = ('<!doctype html>\n<html lang="tr">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="theme-color" content="#EEF1F5">\n' 
+hosted = ('<!doctype html>\n<html lang="tr">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="theme-color" content="#1B2A49">\n' 
           + render("hosted", paths) + '\n</body>\n</html>\n')
-hosted = hosted.replace("</style>\n\n<div class=\"wrap\">", "</style>\n</head>\n<body>\n<div class=\"wrap\">", 1)
+hosted = hosted.replace("</style>\n\n<div class=\"site\">", "</style>\n</head>\n<body>\n<div class=\"site\">", 1)
 open(f"{DST}/index.html", "w", encoding="utf-8").write(hosted)
 print("artifact:", round(os.path.getsize(f"{SP}/odanda-gor.html")/1024), "KB; hosted:", round(os.path.getsize(f"{DST}/index.html")/1024), "KB")
 print("title ilk 8KB icinde:", "<title>" in art[:8192], "| hosted head/body:", hosted.count("<head>"), hosted.count("<body>"), hosted.count("</head>"))

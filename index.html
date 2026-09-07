@@ -3,161 +3,256 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#EEF1F5">
+<meta name="theme-color" content="#1B2A49">
 <title>Odanda Gör</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Manrope:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
 <style>
+/* Tek tema: Aşiyan sitesinin beyaz zemini, lacivert şeridi ve pembe duyuru bandı bilinçli olarak korunuyor. */
 :root{
-  --bg:#EEF1F5;--surface:#FFFFFF;--surface-2:#F6F8FB;--ink:#15213B;--muted:#5B6577;--line:#D9DFE8;
-  --accent:#B8873A;--accent-ink:#FFFFFF;--ok:#1F7A4D;--warn:#8A5A00;--warn-bg:#FFF5DF;--stage:#E4E8EE;
-  --shadow:0 10px 30px rgba(21,33,59,.12);--seg:#DFE4EC;
-  --font-display:"Sora",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  --font-body:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --bg:#FFFFFF;--ink:#222222;--muted:#6B6B6B;--line:#E4E4E4;--soft:#F7F5F2;
+  --navy:#1B2A49;--pink:#F5DEDE;--pink-ink:#2B2B2B;--black:#2B2B2B;--red:#D43B3B;--ok:#1F7A4D;--warn:#8A5A00;--warn-bg:#FFF5DF;
+  --font:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){--bg:#0E1524;--surface:#172033;--surface-2:#1C2740;--ink:#EDF1F7;--muted:#9AA6B8;--line:#2A3549;--accent:#D9AB5C;--accent-ink:#1A1408;--ok:#5CC08A;--warn:#E3B45C;--warn-bg:#2A2410;--stage:#111A2C;--shadow:0 10px 30px rgba(0,0,0,.45);--seg:#1C2740}
-}
-:root[data-theme="dark"]{--bg:#0E1524;--surface:#172033;--surface-2:#1C2740;--ink:#EDF1F7;--muted:#9AA6B8;--line:#2A3549;--accent:#D9AB5C;--accent-ink:#1A1408;--ok:#5CC08A;--warn:#E3B45C;--warn-bg:#2A2410;--stage:#111A2C;--shadow:0 10px 30px rgba(0,0,0,.45);--seg:#1C2740}
 *{box-sizing:border-box}
 html,body{background:var(--bg)}
-body{margin:0;color:var(--ink);font:15px/1.5 var(--font-body);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+body{margin:0;color:var(--ink);font:400 14px/1.55 var(--font);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 button,input,a{font-family:inherit}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.wrap{max-width:720px;margin:0 auto;padding:16px 14px 48px}
-.top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:2px 2px 14px}
-.brand{font:700 22px/1.1 var(--font-display);letter-spacing:-.01em}
-.brand small{display:block;font:600 12px/1.4 var(--font-body);color:var(--muted);margin-top:4px;letter-spacing:.02em}
-.pill{flex:none;font-size:11.5px;font-weight:700;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 10px;color:var(--muted);white-space:nowrap}
-.product{padding:0 2px 16px;border-bottom:1px solid var(--line);margin-bottom:14px}
-h1{font:600 16px/1.35 var(--font-display);margin:0 0 8px;text-wrap:balance}
-.price{display:flex;align-items:baseline;gap:8px;font-variant-numeric:tabular-nums}
-.price .old{text-decoration:line-through;color:var(--muted)}
-.price .new{font:700 22px/1 var(--font-display)}
-.badge{background:var(--ink);color:var(--bg);font-size:11px;font-weight:700;padding:3px 6px;border-radius:5px;letter-spacing:.02em}
+:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.site{overflow-x:hidden}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+.bar-pink{background:var(--pink);color:var(--pink-ink);text-align:center;font:500 11.5px/1.2 var(--font);letter-spacing:.06em;padding:11px 12px;text-transform:uppercase}
+.site-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--navy)}
+.logo .mark{width:40px;height:40px;border-radius:10px;background:var(--navy);color:#fff;display:grid;place-items:center;font:700 16px/1 var(--font);letter-spacing:-.02em}
+.logo b{font:700 24px/1 var(--font);letter-spacing:-.01em}
+.logo small{display:block;font:500 9.5px/1.2 var(--font);letter-spacing:.12em;text-transform:uppercase;color:#4A5568;margin-top:3px}
+.nav{display:none;gap:26px;font-size:15px;color:#2B2B2B}
+@media (min-width:900px){.nav{display:flex}}
+.demo-tag{font:600 11px/1 var(--font);letter-spacing:.08em;text-transform:uppercase;color:var(--navy);border:1.5px solid var(--navy);border-radius:999px;padding:7px 11px;white-space:nowrap}
+.bar-navy{background:var(--navy);color:#fff;font:500 12px/1 var(--font);letter-spacing:.08em;padding:10px 0;white-space:nowrap;overflow:hidden;text-transform:uppercase}
+.bar-navy span{display:inline-block;padding:0 44px}
+.crumbs{font-size:13px;color:#555;padding:16px 0 6px;display:flex;gap:10px;flex-wrap:wrap}
+.crumbs b{font-weight:400;color:var(--ink)}
+.product-grid{display:grid;gap:18px;grid-template-columns:minmax(0,1fr);grid-template-areas:"info" "stage" "cta";padding:8px 0 28px}
+.product-grid>*{min-width:0}
+.plugin,.stage,.tabs,.toolbar{min-width:0}
+@media (min-width:900px){.product-grid{grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);grid-template-areas:"stage info" "stage cta";align-items:start;gap:36px}}
+.col-stage{grid-area:stage}.col-info{grid-area:info}.col-cta{grid-area:cta}
+h1{font:400 22px/1.35 var(--font);margin:0 0 8px;text-wrap:balance;color:var(--ink)}
+.stock{color:var(--red);font-weight:500;font-size:14px;display:inline-flex;align-items:center;gap:6px}
+.stock i{width:9px;height:9px;border-radius:50%;background:var(--red);display:inline-block}
+.code{font-size:12px;color:var(--muted);margin:10px 0 14px}
+.price{display:flex;align-items:center;gap:10px;font-variant-numeric:tabular-nums}
+.price .badge{background:var(--black);color:#fff;font:700 12px/1 var(--font);padding:9px 8px;border-radius:2px}
+.price .old{text-decoration:line-through;color:var(--muted);font-size:14px}
+.price .new{font:700 22px/1 var(--font)}
+.kdv{font-size:12px;color:var(--ink);text-decoration:underline;margin-top:6px;display:block}
+.label{font-size:14px;color:var(--muted);margin:18px 0 8px}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.label{font-size:11px;color:var(--muted);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
-.swatch{width:60px;height:60px;border-radius:8px;border:2px solid var(--line);padding:2px;background:var(--surface);cursor:pointer}
-.swatch.on{border-color:var(--accent)}
-.swatch img{width:100%;height:100%;object-fit:cover;border-radius:5px;display:block}
-.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 12px;font-weight:700;font-size:13px;cursor:pointer;color:var(--ink);font-variant-numeric:tabular-nums}
-.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.chip small{font-weight:600;opacity:.7}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--seg);padding:5px;border-radius:12px;margin:0 0 12px}
-.tabs button{border:0;background:transparent;padding:11px 8px;border-radius:8px;font-weight:700;font-size:14px;color:var(--muted);cursor:pointer}
-.tabs button.on{background:var(--surface);color:var(--ink);box-shadow:0 2px 8px rgba(21,33,59,.10)}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:var(--shadow)}
-.stage{position:relative;background:var(--stage);border-radius:10px;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}
+.swatch{width:56px;height:56px;border-radius:4px;border:1px solid #D9D9D9;padding:2px;background:#fff;cursor:pointer}
+.swatch.on{border:2px solid var(--black)}
+.swatch img{width:100%;height:100%;object-fit:cover;display:block}
+.chip{border:1px solid #D9D9D9;background:#fff;border-radius:3px;padding:12px 16px;font-weight:700;font-size:14px;cursor:pointer;color:var(--ink);font-variant-numeric:tabular-nums}
+.chip.on{background:var(--black);color:#fff;border-color:var(--black)}
+.chip small{font-weight:400;opacity:.75;font-size:11px}
+.share{display:flex;align-items:center;gap:10px;font-size:14px;margin:18px 0 6px}
+.share a{color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12.5px}
+.cta{display:grid;gap:10px;margin-top:8px}
+.cta-btn{border:0;border-radius:999px;padding:17px 18px;font:600 13px/1 var(--font);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;text-align:center}
+.cta-black{background:var(--black);color:#fff}
+.cta-pink{background:var(--pink);color:var(--pink-ink)}
+/* Eklenti bloğu */
+.plugin{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff}
+.plugin-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.eyebrow{font:600 11px/1 var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--navy)}
+.eyebrow small{display:block;font:300 11px/1.3 var(--font);letter-spacing:.02em;text-transform:none;color:var(--muted);margin-top:4px}
+.pill{font:500 11px/1 var(--font);background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:7px 10px;color:var(--muted);white-space:nowrap}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--soft);padding:5px;border-radius:999px;margin:0 0 12px}
+.tabs button{border:0;background:transparent;padding:11px 8px;border-radius:999px;font:500 13.5px/1 var(--font);color:var(--muted);cursor:pointer}
+.tabs button.on{background:var(--navy);color:#fff}
+.stage{position:relative;background:#EDEBE7;border-radius:10px;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}
 .stage canvas{display:block;width:100%;height:100%}
-.hint{position:absolute;left:10px;right:10px;bottom:10px;background:rgba(21,33,59,.86);color:#fff;padding:9px 12px;border-radius:8px;font-size:13px;text-align:center;pointer-events:none}
-.scale{position:absolute;top:10px;left:10px;right:10px;width:max-content;max-width:calc(100% - 20px);background:var(--warn-bg);color:var(--warn);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700;pointer-events:none;font-variant-numeric:tabular-nums}
-.scale.ok{background:var(--surface);color:var(--ok)}
-.btn{border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;font-weight:700;font-size:14px;cursor:pointer;background:var(--surface);color:var(--ink);text-align:center;text-decoration:none;display:inline-block;line-height:1.2}
-.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.btn.gold{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.btn.sm{padding:9px 12px;font-size:13px}
-.toolbar{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
-.toolbar .btn{width:100%}
-.rooms{display:flex;gap:8px;overflow-x:auto;padding:2px 0 6px}
-.room{flex:0 0 auto;border:2px solid var(--line);border-radius:10px;background:var(--surface);padding:0;cursor:pointer;overflow:hidden;width:112px}
-.room.on{border-color:var(--accent)}
-.room img{width:112px;height:80px;display:block;object-fit:cover}
-.room span{display:block;font-size:12px;font-weight:700;padding:6px;color:var(--ink)}
-.note{font-size:12.5px;color:var(--muted);margin:10px 0 0;max-width:65ch}
-.calib{position:absolute;left:10px;right:10px;bottom:10px;background:var(--surface);color:var(--ink);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
-.calib input{width:96px;padding:8px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;font-weight:700;background:var(--surface);color:var(--ink)}
+.hint{position:absolute;left:10px;right:10px;bottom:10px;background:rgba(27,42,73,.88);color:#fff;padding:9px 12px;border-radius:8px;font-size:12.5px;text-align:center;pointer-events:none}
+.scale{position:absolute;top:10px;left:10px;right:10px;width:max-content;max-width:calc(100% - 20px);background:var(--warn-bg);color:var(--warn);border-radius:999px;padding:6px 11px;font-size:12px;font-weight:500;pointer-events:none;font-variant-numeric:tabular-nums}
+.scale.ok{background:rgba(255,255,255,.95);color:var(--ok)}
+.btn{border:1px solid #D0D0D0;border-radius:999px;padding:13px 14px;font:500 13px/1.2 var(--font);cursor:pointer;background:#fff;color:var(--ink);text-align:center;text-decoration:none;display:inline-block}
+.btn.primary{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn.dark{background:var(--black);color:#fff;border-color:var(--black)}
+.btn.sm{padding:9px 12px;font-size:12.5px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.toolbar .btn{flex:1 1 calc(50% - 4px)}
+.rooms{display:flex;gap:10px;overflow-x:auto;padding:2px 0 6px}
+.room{flex:0 0 auto;border:1px solid #D9D9D9;border-radius:10px;background:#fff;padding:0;cursor:pointer;overflow:hidden;width:150px;text-align:left}
+.room.on{border:2px solid var(--navy)}
+.room img{width:100%;height:96px;display:block;object-fit:cover}
+.room .rn{display:block;font:500 13px/1.2 var(--font);color:var(--ink);padding:8px 10px 0}
+.room .rc{display:block;font:300 11px/1.35 var(--font);color:var(--muted);padding:2px 10px 9px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0;max-width:65ch;font-weight:300}
+.note b{font-weight:500;color:var(--ink)}
+.calib{position:absolute;left:10px;right:10px;bottom:10px;background:#fff;color:var(--ink);border-radius:10px;padding:10px;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.calib input{width:96px;padding:9px;border:1px solid #D0D0D0;border-radius:8px;font:600 15px var(--font);background:#fff;color:var(--ink)}
 model-viewer::part(default-ar-button){display:none}
-model-viewer{width:100%;height:min(58vh,500px);background:var(--stage);border-radius:10px;--poster-color:transparent;--progress-bar-color:var(--accent)}
-.fallback{position:relative;background:var(--stage);border-radius:10px;padding:18px;display:flex;align-items:center;justify-content:center;min-height:240px}
-.fallback img{max-width:88%;box-shadow:var(--shadow)}
-.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13px;margin-top:12px}
-.kv b{color:var(--muted);font-weight:600}
-details{font-size:13px;color:var(--muted);margin-top:12px}
-details summary{cursor:pointer;font-weight:700;color:var(--ink)}
+model-viewer{width:100%;height:min(58vh,520px);background:#EDEBE7;border-radius:10px;--poster-color:transparent;--progress-bar-color:var(--navy)}
+.fallback{position:relative;background:#EDEBE7;border-radius:10px;padding:18px;display:flex;align-items:center;justify-content:center;min-height:240px}
+.fallback img{max-width:88%;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:12.5px;margin-top:12px;color:var(--muted);font-weight:300}
+.kv b{color:var(--ink);font-weight:500}
+details{font-size:12.5px;color:var(--muted);margin-top:12px;font-weight:300}
+details summary{cursor:pointer;font-weight:500;color:var(--ink)}
 details a{color:var(--ink)}
-#qr{display:flex;justify-content:center;padding:8px;background:#fff;border-radius:8px;width:max-content;margin:8px auto 0}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:10px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9;max-width:90vw;text-align:center}
+#qr{display:flex;justify-content:center;padding:8px;background:#fff;border-radius:8px;width:max-content;margin:8px auto 0;border:1px solid var(--line)}
+/* Satış bölümü */
+.pitch{background:var(--soft);border-radius:16px;padding:28px 20px;margin:8px 0 28px}
+@media (min-width:900px){.pitch{padding:40px 44px}}
+.pitch .eyebrow{color:var(--navy)}
+.pitch h2{font:600 24px/1.25 var(--font);margin:10px 0 10px;color:var(--navy);text-wrap:balance;max-width:26ch}
+.pitch .lead{font-size:15px;color:var(--ink);max-width:62ch;margin:0 0 22px}
+.cards{display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:640px){.cards{grid-template-columns:1fr 1fr}}
+@media (min-width:1000px){.cards{grid-template-columns:repeat(3,1fr)}}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 16px 14px}
+.card h3{font:600 14.5px/1.3 var(--font);margin:0 0 6px;color:var(--ink)}
+.card p{margin:0;font-size:13px;color:var(--muted);font-weight:300;line-height:1.55}
+.steps{display:grid;gap:10px;margin:22px 0 0;padding:0;list-style:none;counter-reset:adim}
+@media (min-width:900px){.steps{grid-template-columns:repeat(3,1fr)}}
+.steps li{counter-increment:adim;display:flex;gap:12px;align-items:flex-start;font-size:13px;color:var(--ink)}
+.steps li::before{content:counter(adim);flex:none;width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font:600 13px/1 var(--font)}
+.steps li span{padding-top:4px;font-weight:300}
+.steps li span b{font-weight:500}
+.closing{margin:22px 0 0;padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--ink);display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 14px;border-radius:10px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9;max-width:90vw;text-align:center}
 .toast.show{opacity:1}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:16px;z-index:10}
-.modal-in{background:var(--surface);border-radius:14px;padding:12px;max-width:520px;width:100%;text-align:center}
+.modal-in{background:#fff;border-radius:14px;padding:12px;max-width:520px;width:100%;text-align:center}
 .modal-in img{max-width:100%;border-radius:8px;display:block;margin:0 auto 8px}
-footer{font-size:12px;color:var(--muted);text-align:center;padding:18px 8px 0;max-width:65ch;margin:0 auto}
+footer{font-size:12px;color:var(--muted);text-align:center;padding:18px 8px 34px;max-width:70ch;margin:0 auto;font-weight:300}
 footer a{color:inherit}
 @media (prefers-reduced-motion: reduce){.toast{transition:none}}
 [hidden]{display:none!important}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <div class="brand">Odanda Gör <small>Aşiyan Sanat için konsept demo</small></div>
-    <span class="pill" id="devicePill">…</span>
-  </header>
-
-  <section class="product">
-    <h1 id="urunAd"></h1>
-    <div class="price"><span class="badge">%25</span><span class="old">₺2.000,00</span><span class="new">₺1.499,00</span></div>
-    <div class="label">Çerçeve</div>
-    <div class="row" id="swatches"></div>
-    <div class="label">Boyut</div>
-    <div class="row" id="boyutlar"></div>
-  </section>
-
-  <div class="tabs" role="tablist">
-    <button id="tabFoto" class="on" role="tab">Fotoğrafla dene</button>
-    <button id="tabAr" role="tab">Kamerayla gör (AR)</button>
+<div class="site">
+  <div class="bar-pink">Tüm banka kartlarına 9 taksit imkanı</div>
+  <div class="wrap">
+    <header class="site-head">
+      <a class="logo" href="https://asiyansanat.com/" target="_blank" rel="noopener"><span class="mark">aş</span><span><b>aşiyan</b><small>Sanat &amp; Çerçeve</small></span></a>
+      <nav class="nav"><span>Hat Eserleri</span><span>İndirimli Hat Eserleri</span><span>İletişim</span><span>Ebru Eserleri</span></nav>
+      <span class="demo-tag">Odanda Gör · demo</span>
+    </header>
   </div>
+  <div class="bar-navy"><span>Tüm ürünlerde 4 al 3 öde</span><span>Tüm ürünlerde 4 al 3 öde</span><span>Tüm ürünlerde 4 al 3 öde</span><span>Tüm ürünlerde 4 al 3 öde</span><span>Tüm ürünlerde 4 al 3 öde</span></div>
 
-  <section id="secFoto" class="panel">
-    <div class="stage" id="stage">
-      <canvas id="cv"></canvas>
-      <div class="scale" id="scaleBadge">Ölçek tahmini</div>
-      <div class="hint" id="hint">Tabloyu sürükle. Kendi duvarın için “Fotoğraf çek”.</div>
-      <div class="calib" id="calib" hidden>
-        <div style="font-weight:700;margin-bottom:6px">İşaretlediğin mesafe gerçekte kaç cm?</div>
-        <div class="row" id="presets"></div>
-        <div class="row" style="margin-top:8px">
-          <input id="cmInput" type="number" inputmode="decimal" min="1" step="0.1" placeholder="cm" aria-label="Santimetre">
-          <button class="btn sm primary" id="calibOk">Uygula</button>
-          <button class="btn sm" id="calibCancel">İptal</button>
+  <div class="wrap">
+    <div class="crumbs"><span>İçeriğine Göre Tablolar</span><span>›</span><b>Hasbunallahu Ve Nimel Vekil Tabloları</b></div>
+
+    <main class="product-grid">
+      <section class="col-info">
+        <h1 id="urunAd"></h1>
+        <span class="stock"><i></i>Tükeniyor</span>
+        <div class="code">Ürün Kodu: PBH11937</div>
+        <div class="price"><span class="badge">%25</span><span class="old">₺2.000,00</span><span class="new">₺1.499,00</span></div>
+        <span class="kdv">KDV Dahil</span>
+        <div class="label">Çerçeve</div>
+        <div class="row" id="swatches"></div>
+        <div class="label">Boyut</div>
+        <div class="row" id="boyutlar"></div>
+      </section>
+
+      <section class="col-stage">
+        <div class="plugin">
+          <div class="plugin-head">
+            <div class="eyebrow">Odanda Gör <small>Tabloyu satın almadan önce kendi duvarında gör</small></div>
+            <span class="pill" id="devicePill">…</span>
+          </div>
+          <div class="tabs" role="tablist">
+            <button id="tabFoto" class="on" role="tab">Fotoğrafla dene</button>
+            <button id="tabAr" role="tab">Kamerayla gör (AR)</button>
+          </div>
+
+          <div id="secFoto">
+            <div class="stage" id="stage">
+              <canvas id="cv"></canvas>
+              <div class="scale" id="scaleBadge">Ölçek tahmini</div>
+              <div class="hint" id="hint">Tabloyu sürükle. Kendi duvarın için “Fotoğraf çek”.</div>
+              <div class="calib" id="calib" hidden>
+                <div style="font-weight:600;margin-bottom:6px">İşaretlediğin mesafe gerçekte kaç cm?</div>
+                <div class="row" id="presets"></div>
+                <div class="row" style="margin-top:8px">
+                  <input id="cmInput" type="number" inputmode="decimal" min="1" step="0.1" placeholder="cm" aria-label="Santimetre">
+                  <button class="btn sm primary" id="calibOk">Uygula</button>
+                  <button class="btn sm" id="calibCancel">İptal</button>
+                </div>
+              </div>
+            </div>
+            <div class="toolbar">
+              <label class="btn primary">Fotoğraf çek<input id="inpCam" type="file" accept="image/*" capture="environment" hidden></label>
+              <label class="btn">Galeriden seç<input id="inpGal" type="file" accept="image/*" hidden></label>
+              <button class="btn" id="btnCalib" hidden>Ölçü ver</button>
+              <button class="btn" id="btnShare">Kaydet / Paylaş</button>
+            </div>
+            <div class="label" style="margin-top:14px">Hazır odalar</div>
+            <div class="rooms" id="rooms"></div>
+            <p class="note">Tek parmakla sürükle. Kendi fotoğrafında iki parmakla büyüt ya da küçült; <b>Ölçü ver</b> ile bilinen bir uzunluğu işaretleyince tablo gerçek boyutuna kilitlenir. Fotoğraf telefondan çıkmaz; işlem tarayıcıda biter.</p>
+            <div class="row" style="margin-top:10px"><button class="btn sm" id="btnReset">Sıfırla</button></div>
+          </div>
+
+          <div id="secAr" hidden>
+            <model-viewer id="mv" ar ar-modes="webxr scene-viewer quick-look" ar-placement="wall" ar-scale="fixed"
+              camera-controls touch-action="pan-y" shadow-intensity="0.7" exposure="1" camera-orbit="0deg 82deg auto"
+              alt="Çerçeveli hat tablosu, gerçek ölçülü 3B model"></model-viewer>
+            <div class="fallback" id="fallback" hidden><img id="fallbackImg" alt="Tablo önizleme"></div>
+            <div class="toolbar">
+              <button class="btn primary" id="btnAr">Odanda Gör</button>
+              <a class="btn" id="svLink" hidden>Scene Viewer'ı doğrudan aç</a>
+            </div>
+            <p class="note" id="arStatus"></p>
+            <div id="qrBox" hidden><div id="qr"></div><p class="note" style="text-align:center;margin:8px auto 0">AR yalnızca telefonda çalışır. Kareyi telefon kamerasıyla okut.</p></div>
+            <div class="kv">
+              <b>Model ölçüsü</b><span id="modelOlcu"></span>
+              <b>iPhone</b><span>Safari, AR Quick Look. Tablo duvara yerleşir; iki parmakla döndür, tek parmakla kaydır.</span>
+              <b>Android</b><span>Chrome, tarayıcı içi AR ya da Google Scene Viewer; duvara yerleşir.</span>
+            </div>
+            <details>
+              <summary>Teknik notlar</summary>
+              <p>Çerçeve derinliği 3 cm varsayıldı. Ölçek kilitli; kullanıcı büyütüp küçültemez. USDZ'deki dikey yüzey çapası ve dik geometri telefonda doğrulandı (8 Eyl 2026). Hazır odalarda ölçek, çizgiyle gösterilen mobilyanın gerçek ölçüsünden türetiliyor; mobilya duvardan öndeyse tablo bir miktar büyük görünür.</p>
+              <p id="devFiles"></p>
+            </details>
+          </div>
         </div>
+      </section>
+
+      <section class="col-cta">
+        <div class="share">Paylaş: <a href="#" data-demo>WhatsApp</a><a href="#" data-demo>Facebook</a><a href="#" data-demo>Bağlantı</a></div>
+        <div class="cta">
+          <button class="cta-btn cta-black" data-demo>Sepete ekle</button>
+          <button class="cta-btn cta-pink" data-demo>Hemen al</button>
+        </div>
+      </section>
+    </main>
+
+    <section class="pitch" id="pitch">
+      <div class="eyebrow">Aşiyan Sanat için</div>
+      <h2>Odanda Gör, “duvarımda nasıl durur?” sorusunu satın almadan önce cevaplar.</h2>
+      <p class="lead">Tablo alırken en büyük tereddüt ölçüdür. Müşteri 29x50 ile 45x78 arasında kararsız kalır, sepeti bırakır ya da yanlış boyu alır. Odanda Gör bu kararı ürün sayfasında, kendi duvarında verdirir. Yukarıdaki blok, sitenizin ürün sayfasına eklenecek hâlidir; Aşiyan'ın gerçek ürünü ve çerçeve seçenekleriyle çalışıyor.</p>
+      <div class="cards">
+        <div class="card"><h3>Ölçü tereddüdü biter</h3><p>Müşteri iki boyutu kendi duvarında dener. Büyük boya geçiş kolaylaşır, “küçük geldi” iadeleri azalır.</p></div>
+        <div class="card"><h3>Her tabloda otomatik çalışır</h3><p>Sitedeki 700'den fazla çerçeveli tabloda ek veri girişi gerekmez. Çerçeve rengi ve boyut seçimini ürün sayfasından kendisi okur.</p></div>
+        <div class="card"><h3>Telefonda kamerayla</h3><p>iPhone ve Android'de kamera açılır, tablo duvara gerçek boyutuyla yerleşir. Uygulama indirmek gerekmez.</p></div>
+        <div class="card"><h3>Bilgisayarda da çalışır</h3><p>Müşteri duvarının fotoğrafını yükler, tabloyu sürükler, bir A4 kâğıtla gerçek ölçüye kilitler. Hazır odalarla da deneyebilir.</p></div>
+        <div class="card"><h3>Karar paylaşılır</h3><p>Odasındaki tabloyu tek dokunuşla eşine, arkadaşına gönderir. Karar hızlanır, ürününüz sohbetlerde dolaşır.</p></div>
+        <div class="card"><h3>Güven ve hız</h3><p>Fotoğraf müşterinin telefonundan çıkmaz; tüm işlem tarayıcıda biter. Sitenin açılış hızını etkilemez.</p></div>
       </div>
-    </div>
-    <div class="toolbar">
-      <label class="btn primary">Fotoğraf çek<input id="inpCam" type="file" accept="image/*" capture="environment" hidden></label>
-      <label class="btn">Galeriden seç<input id="inpGal" type="file" accept="image/*" hidden></label>
-      <button class="btn" id="btnCalib">Ölçü ver</button>
-      <button class="btn" id="btnShare">Kaydet / Paylaş</button>
-    </div>
-    <div class="label">Hazır odalar</div>
-    <div class="rooms" id="rooms"></div>
-    <p class="note">Hazır odalarda ölçek, üstünde yazan mobilya ölçüsüne göre: koltuk 220 cm, arka dolap 240 cm, yemek masası 180 cm. Tek parmakla sürükle. Kendi fotoğrafında ölçü verilmemişse iki parmakla büyüt ya da küçült. <b>Ölçü ver</b> ile fotoğraftaki bilinen bir uzunluğu işaretleyince tablo gerçek boyutuna kilitlenir. Fotoğraf telefondan çıkmaz; işlem tarayıcıda biter.</p>
-    <div class="row" style="margin-top:10px"><button class="btn sm" id="btnReset">Sıfırla</button></div>
-  </section>
+      <ol class="steps">
+        <li><span><b>Kurulum</b> ikas panelinden eklenti olarak yapılır; tema ve ürün verisi değişmez.</span></li>
+        <li><span><b>Ürün sayfasında</b> “Odanda Gör” düğmesi belirir; seçilen çerçeve ve boyutu otomatik takip eder.</span></li>
+        <li><span><b>Raporlama</b> ile kaç müşterinin denediği ve sepete eklediği görülür.</span></li>
+      </ol>
+      <div class="closing"><span>Bu sayfa Aşiyan'ın ürün verisiyle hazırlandı; mağazanızda canlıya almak için hazır.</span><a class="btn dark" href="#stage">Demoyu yukarıda dene</a></div>
+    </section>
 
-  <section id="secAr" class="panel" hidden>
-    <model-viewer id="mv" ar ar-modes="webxr scene-viewer quick-look" ar-placement="wall" ar-scale="fixed"
-      camera-controls touch-action="pan-y" shadow-intensity="0.7" exposure="1" camera-orbit="0deg 82deg auto"
-      alt="Çerçeveli hat tablosu, gerçek ölçülü 3B model"></model-viewer>
-    <div class="fallback" id="fallback" hidden><img id="fallbackImg" alt="Tablo önizleme"></div>
-    <div class="toolbar">
-      <button class="btn gold" id="btnAr">Odanda Gör</button>
-      <a class="btn" id="svLink" hidden>Scene Viewer'ı doğrudan aç</a>
-    </div>
-    <p class="note" id="arStatus"></p>
-    <div id="qrBox" hidden><div id="qr"></div><p class="note" style="text-align:center;margin:8px auto 0">AR yalnızca telefonda çalışır. Kareyi telefon kamerasıyla okut.</p></div>
-    <div class="kv">
-      <b>Model ölçüsü</b><span id="modelOlcu"></span>
-      <b>iPhone</b><span>Safari, AR Quick Look. Tablo duvara yerleşir; iki parmakla döndür, tek parmakla kaydır.</span>
-      <b>Android</b><span>Chrome, tarayıcı içi AR (WebXR) ya da Google Scene Viewer; duvara yerleşir.</span>
-    </div>
-    <details>
-      <summary>Geliştirici notları</summary>
-      <p>Çerçeve derinliği 3 cm varsayıldı. Ölçek kilitli; kullanıcı büyütüp küçültemez. USDZ'deki dikey yüzey çapası ve dik geometri telefonda doğrulandı (8 Eyl 2026). Hazır odalarda ölçek, çizgiyle gösterilen mobilyanın gerçek ölçüsünden türetiliyor (ROOMS.ref). Mobilya duvardan öndeyse tablo bir miktar büyük görünür; yemek masası buna örnek.</p>
-      <p id="devFiles"></p>
-    </details>
-  </section>
-
-  <footer>Konsept demo. Ürün bilgisi ve görseller <a href="https://asiyansanat.com/hasbunallahu-ve-nimel-vekil-nimel-mevla-ve-ni-men-nasir-ayna-cerceveli-tablo" target="_blank" rel="noopener">asiyansanat.com</a> ürün sayfasından alındı; site ile bağlantısı yoktur.</footer>
+    <footer>Konsept demo. Ürün bilgisi ve görseller <a href="https://asiyansanat.com/hasbunallahu-ve-nimel-vekil-nimel-mevla-ve-ni-men-nasir-ayna-cerceveli-tablo" target="_blank" rel="noopener">asiyansanat.com</a> ürün sayfasından alındı. Site tasarımı yalnızca eklentinin yerleşimini göstermek için taklit edildi; Aşiyan Sanat ile bağlantısı yoktur.</footer>
+  </div>
 </div>
 <div class="toast" id="toast" role="status"></div>
 <div class="modal" id="modal" hidden><div class="modal-in"><img id="modalImg" alt="Kaydetmek için görsele uzun bas"><p class="note" style="margin:0 0 10px">Görsele uzun basıp “Fotoğrafı Kaydet” diyebilirsin.</p><button class="btn sm" id="modalClose">Kapat</button></div></div>
@@ -226,13 +321,14 @@ URUN.cerceveler.forEach(c=>{
 });
 URUN.boyutlar.forEach((b,i)=>{
   const el=document.createElement("button"); el.className="chip"+(i===state.boyut?" on":"");
-  el.innerHTML = b.gercek ? `${b.ad} cm` : `${b.ad} cm <small>örnek</small>`;
+  el.innerHTML = b.gercek ? `${b.ad}` : `${b.ad} <small>örnek</small>`;
   el.onclick=()=>{ const eski=boyut().en; state.boyut=i; document.querySelectorAll("#boyutlar .chip").forEach(c=>c.classList.remove("on")); el.classList.add("on");
     if(!state.pxPerCm && state.art.wPx){ state.art.wPx *= b.en/eski; } draw(); $("modelOlcu").textContent = modelOlcuMetni(); };
   $("boyutlar").appendChild(el);
 });
 function modelOlcuMetni(){ const c=cerceve(); return `${fmtCm(50)} × ${fmtCm(50/c.aspect)} × 3 cm. AR'da yalnızca gerçek boyut (29x50).`; }
 $("modelOlcu").textContent = modelOlcuMetni();
+document.querySelectorAll("[data-demo]").forEach(el=>{ el.addEventListener("click", e=>{ e.preventDefault(); toast("Demo: gerçek sitede bu düğme çalışır."); }); });
 
 // Sekmeler
 function showTab(t){
@@ -245,7 +341,7 @@ $("tabFoto").onclick=()=>showTab("foto"); $("tabAr").onclick=()=>showTab("ar");
 
 // Kanvas
 function fitCanvas(){
-  cssW = stage.clientWidth || 360; cssH = Math.round(Math.min(window.innerHeight*0.62, cssW*1.25));
+  cssW = stage.clientWidth || 360; cssH = Math.round(Math.min(window.innerHeight*0.62, cssW*1.1));
   stage.style.height = cssH+"px";
   const dpr = Math.min(window.devicePixelRatio||1, 2);
   cv.width = Math.round(cssW*dpr); cv.height = Math.round(cssH*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
@@ -261,11 +357,11 @@ function placeInRoom(){ const r=ROOMS.find(r=>r.id===state.room), f=roomFit(cssW
 function drawDimension(r,f){
   const k=f.im.naturalWidth/1280*f.sc, X=v=>f.ox+v*k, Y=v=>f.oy+v*k;
   const x1=X(r.ref.x1), x2=X(r.ref.x2), y=Y(r.ref.y), t=6;
-  ctx.save(); ctx.strokeStyle="rgba(21,33,59,.85)"; ctx.lineWidth=1.5;
+  ctx.save(); ctx.strokeStyle="rgba(27,42,73,.85)"; ctx.lineWidth=1.5;
   ctx.beginPath(); ctx.moveTo(x1,y); ctx.lineTo(x2,y); ctx.moveTo(x1,y-t); ctx.lineTo(x1,y+t); ctx.moveTo(x2,y-t); ctx.lineTo(x2,y+t); ctx.stroke();
-  const txt=`${r.ref.ad} ${fmtCm(r.ref.cm)} cm`; ctx.font="700 12px Manrope, -apple-system, sans-serif"; const w=ctx.measureText(txt).width+16, h=22, cx=(x1+x2)/2;
-  ctx.fillStyle="rgba(255,255,255,.92)"; ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(cx-w/2,y-h/2,w,h,11); else ctx.rect(cx-w/2,y-h/2,w,h); ctx.fill();
-  ctx.fillStyle="#15213B"; ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText(txt,cx,y+0.5); ctx.restore();
+  const txt=`${r.ref.ad} ${fmtCm(r.ref.cm)} cm`; ctx.font="500 12px Poppins, -apple-system, sans-serif"; const w=ctx.measureText(txt).width+16, h=22, cx=(x1+x2)/2;
+  ctx.fillStyle="rgba(255,255,255,.94)"; ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(cx-w/2,y-h/2,w,h,11); else ctx.rect(cx-w/2,y-h/2,w,h); ctx.fill();
+  ctx.fillStyle="#1B2A49"; ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText(txt,cx,y+0.5); ctx.restore();
 }
 
 function artSize(){ const c=cerceve(); const w = state.pxPerCm ? boyut().en*state.pxPerCm : state.art.wPx; return {w, h:w/c.aspect}; }
@@ -304,14 +400,15 @@ function draw(){
 
 // Hazır odalar
 function selectRoom(id){
-  state.bgKind="room"; state.room=id; state.bg=null; state.calib={active:false,pts:[]}; $("calib").hidden=true;
+  state.bgKind="room"; state.room=id; state.bg=null; state.calib={active:false,pts:[]}; $("calib").hidden=true; $("btnCalib").hidden=true;
   document.querySelectorAll(".room").forEach(x=>x.classList.toggle("on", x.dataset.id===id));
   placeInRoom(); draw(); hint("Tabloyu sürükleyip yerini ayarla. Ölçek, çizgideki mobilya ölçüsüne göre.");
 }
 ROOMS.forEach(r=>{
   const el=document.createElement("button"); el.className="room"; el.dataset.id=r.id;
   const im=document.createElement("img"); im.src=asset(r.img); im.alt=r.ad; el.appendChild(im);
-  const sp=document.createElement("span"); sp.textContent=r.ad; el.appendChild(sp);
+  const rn=document.createElement("span"); rn.className="rn"; rn.textContent=r.ad; el.appendChild(rn);
+  const rc=document.createElement("span"); rc.className="rc"; rc.textContent=`${r.ref.ad} ölçüsü ${fmtCm(r.ref.cm)} cm'dir`; el.appendChild(rc);
   el.onclick=()=>selectRoom(r.id);
   $("rooms").appendChild(el);
   const full=new Image(); full.onload=()=>{ if(state.room===r.id){ placeInRoom(); draw(); } }; full.src=asset(r.img); state.imgs[r.img]=full;
@@ -323,6 +420,7 @@ function loadPhoto(file){
   im.onload=()=>{ state.bg=im; state.bgKind="photo"; state.room=null; state.pxPerCm=null; state.calib={active:false,pts:[]}; $("calib").hidden=true;
     document.querySelectorAll(".room").forEach(x=>x.classList.remove("on"));
     state.art.cx=cssW/2; state.art.cy=cssH*0.4; state.art.wPx=cssW*0.42; draw();
+    $("btnCalib").hidden=false;
     hint("Tabloyu sürükle. Gerçek boyut için “Ölçü ver”e bas."); };
   im.onerror=()=>toast("Fotoğraf açılamadı. Başka bir fotoğraf dene.");
   im.src=url;
@@ -349,10 +447,9 @@ function up(e){ pointers.delete(e.pointerId); if(pointers.size<2) pinch=null; if
 cv.addEventListener("pointerup",up); cv.addEventListener("pointercancel",up);
 
 // Ölçü verme
-PRESETS.forEach(([ad,cm])=>{ const b=document.createElement("button"); b.className="chip"; b.innerHTML=`${ad} <small>${fmtCm(cm)}</small>`; b.onclick=()=>{ $("cmInput").value=cm; }; $("presets").appendChild(b); });
+PRESETS.forEach(([ad,cm])=>{ const b=document.createElement("button"); b.className="chip"; b.style.padding="8px 12px"; b.style.fontWeight="500"; b.innerHTML=`${ad} <small>${fmtCm(cm)}</small>`; b.onclick=()=>{ $("cmInput").value=cm; }; $("presets").appendChild(b); });
 $("btnCalib").onclick=()=>{
-  if(state.bgKind==="room"){ toast("Hazır odalar zaten ölçekli. Ölçü verme kendi fotoğrafın için."); return; }
-  if(!state.bgKind){ toast("Önce bir fotoğraf yükle."); return; }
+  if(state.bgKind!=="photo"){ toast("Önce bir fotoğraf yükle."); return; }
   state.calib={active:true,pts:[]}; $("calib").hidden=true; draw(); hint("Boyutunu bildiğin bir şeyin iki ucuna dokun: A4 kâğıt, kapı, koltuk…");
 };
 $("calibCancel").onclick=()=>{ state.calib={active:false,pts:[]}; $("calib").hidden=true; draw(); hint("Tabloyu sürükle."); };
