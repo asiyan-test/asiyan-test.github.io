@@ -307,10 +307,11 @@ const URUN = {
 };
 // Hazır odalar: fotoğraf + bilinen bir mobilya ölçüsü. ref: fotoğrafta (1280 px taban) x1..x2 arası mobilya, gerçekte cm.
 // Ölçek = (x2-x1)/cm. y: ölçü çizgisinin çizileceği satır. art: tablonun varsayılan merkezi (fotoğraf pikseli).
+// focus: geniş/basık kanvasta kırpmanın ortalanacağı bant (fotoğraf pikseli); tablo + mobilya + ölçü çizgisi görünür kalır.
 const ROOMS = [
-  {id:"salon", ad:"Salon", img:"room:salon", ref:{ad:"Koltuk", cm:220, x1:186, x2:1100, y:1100}, art:{x:640, y:650}},
-  {id:"ofis", ad:"Ofis", img:"room:ofis", ref:{ad:"Arka dolap", cm:240, x1:255, x2:1005, y:712}, art:{x:640, y:548}},
-  {id:"yemek", ad:"Yemek odası", img:"room:yemek", ref:{ad:"Masa", cm:180, x1:245, x2:1060, y:802}, art:{x:650, y:485}}
+  {id:"salon", ad:"Salon", img:"room:salon", ref:{ad:"Koltuk", cm:220, x1:186, x2:1100, y:772}, art:{x:640, y:640}, focus:{y1:470, y2:1120, x:640}},
+  {id:"ofis", ad:"Ofis", img:"room:ofis", ref:{ad:"Arka dolap", cm:240, x1:255, x2:1005, y:712}, art:{x:640, y:548}, focus:{y1:380, y2:1010, x:640}},
+  {id:"yemek", ad:"Yemek odası", img:"room:yemek", ref:{ad:"Masa", cm:180, x1:275, x2:1035, y:776}, art:{x:650, y:485}, focus:{y1:330, y2:1000, x:650}}
 ];
 function roomPxPerCm(r){ return (r.ref.x2-r.ref.x1)/r.ref.cm; }
 const PRESETS = [["A4 uzun kenar", 29.7], ["Kapı", 200], ["Koltuk", 220], ["Yatak", 160]];
@@ -381,7 +382,7 @@ $("tabFoto").onclick=()=>showTab("foto"); $("tabAr").onclick=()=>showTab("ar");
 
 // Kanvas
 function fitCanvas(){
-  cssW = stage.clientWidth || 360; cssH = Math.round(Math.min(window.innerHeight*0.62, cssW*1.1));
+  cssW = stage.clientWidth || 360; cssH = Math.round(cssW < 700 ? Math.min(window.innerHeight*0.62, cssW*1.1) : Math.min(window.innerHeight*0.74, cssW*0.85));
   stage.style.height = cssH+"px";
   const dpr = Math.min(window.devicePixelRatio||1, 2);
   cv.width = Math.round(cssW*dpr); cv.height = Math.round(cssH*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
@@ -392,7 +393,16 @@ function fitCanvas(){
 window.addEventListener("resize", ()=>{ if(!$("secFoto").hidden) fitCanvas(); });
 
 function roomImg(){ const r=ROOMS.find(r=>r.id===state.room); return r && state.imgs[r.img]; }
-function roomFit(w,h){ const im=roomImg(); if(!im || !im.naturalWidth) return null; const sc=Math.max(w/im.naturalWidth, h/im.naturalHeight); return {sc, ox:(w-im.naturalWidth*sc)/2, oy:(h-im.naturalHeight*sc)/2, im}; }
+function roomFit(w,h){
+  const im=roomImg(); if(!im || !im.naturalWidth) return null; const r=ROOMS.find(r=>r.id===state.room);
+  const iw=im.naturalWidth, ih=im.naturalHeight, sc=Math.max(w/iw, h/ih), k=iw/1280;
+  let ox=(w-iw*sc)/2, oy=(h-ih*sc)/2;
+  if(r && r.focus){
+    const cy=((r.focus.y1+r.focus.y2)/2)*k*sc, cx=(r.focus.x||640)*k*sc;
+    oy=Math.min(0, Math.max(h-ih*sc, h/2-cy)); ox=Math.min(0, Math.max(w-iw*sc, w/2-cx));
+  }
+  return {sc, ox, oy, im};
+}
 function placeInRoom(){ const r=ROOMS.find(r=>r.id===state.room), f=roomFit(cssW,cssH); if(!r||!f) return; const k=f.im.naturalWidth/1280; state.art.cx=f.ox+r.art.x*k*f.sc; state.art.cy=f.oy+r.art.y*k*f.sc; state.pxPerCm=roomPxPerCm(r)*k*f.sc; }
 function drawDimension(r,f){
   const k=f.im.naturalWidth/1280*f.sc, X=v=>f.ox+v*k, Y=v=>f.oy+v*k;
